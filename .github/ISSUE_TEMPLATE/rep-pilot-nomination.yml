@@ -1,0 +1,137 @@
+name: REP pilot nomination
+description: Nominate a repository for the Repo Excellence Program (REP) pilot wave
+title: "[rep-pilot] "
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Repo Excellence Program (REP)** — [standards hub](https://github.com/blackmalejournal/blackmalejournal/blob/main/docs/standards/README.md)
+
+        Use this form for pilot intake. Markdown copy: [`docs/templates/rep-pilot-nomination.template.md`](https://github.com/blackmalejournal/blackmalejournal/blob/main/docs/templates/rep-pilot-nomination.template.md)
+
+  - type: input
+    id: repository
+    attributes:
+      label: Repository (org/repo)
+      description: Full GitHub path to the repository being nominated.
+      placeholder: my-org/payments-api
+    validations:
+      required: true
+
+  - type: dropdown
+    id: repo_type
+    attributes:
+      label: Repo type
+      options:
+        - service
+        - library
+        - frontend
+        - infra
+        - data
+        - monorepo
+        - prototype
+    validations:
+      required: true
+
+  - type: input
+    id: owning_team
+    attributes:
+      label: Owning team
+      placeholder: Team name or group slug
+    validations:
+      required: true
+
+  - type: input
+    id: engineering_manager
+    attributes:
+      label: Engineering manager
+      placeholder: Name or @handle
+    validations:
+      required: false
+
+  - type: textarea
+    id: primary_contacts
+    attributes:
+      label: Primary contacts
+      description: Slack handles, email, or GitHub usernames for day-to-day questions.
+    validations:
+      required: false
+
+  - type: textarea
+    id: why_nominate
+    attributes:
+      label: Why nominate this repo now
+      description: Risk, impact, current pain, upcoming work — why this is a good pilot.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: baseline
+    attributes:
+      label: Current baseline status (best effort)
+      options:
+        - label: README.md is current and actionable
+        - label: CODEOWNERS exists and is accurate
+        - label: SECURITY.md exists
+        - label: Branch protection has required checks
+        - label: Dependency bot enabled (Dependabot or Renovate)
+        - label: Service metadata exists (service.yaml or catalog)
+        - label: Operational runbook exists (if service)
+
+  - type: textarea
+    id: priority_scores
+    attributes:
+      label: Priority assessment (numbers)
+      description: |
+        Provide scores on one line each:
+        - Business criticality (1–5)
+        - Security/data risk (1–5)
+        - Compliance scope (0–3)
+        - Expected migration effort (1–5)
+      placeholder: |
+        Criticality:
+        Risk:
+        Compliance:
+        Effort:
+    validations:
+      required: false
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Near-term constraints
+      description: Releases, freezes, staffing gaps, or dependencies affecting timing.
+    validations:
+      required: false
+
+  - type: textarea
+    id: success_criteria
+    attributes:
+      label: Pilot success criteria for this repo
+      description: What “done” looks like for this pilot (checklist or bullets).
+    validations:
+      required: false
+
+  - type: input
+    id: pilot_start
+    attributes:
+      label: Preferred pilot start (YYYY-MM-DD)
+    validations:
+      required: false
+
+  - type: input
+    id: pilot_end
+    attributes:
+      label: Preferred pilot end (YYYY-MM-DD)
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Links to incidents, postmortems, audits, or prior migration attempts.
+    validations:
+      required: false

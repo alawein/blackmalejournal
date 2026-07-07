@@ -1,0 +1,113 @@
+name: REP weekly status
+description: Weekly status update for REP rollout (EM / repo owner)
+title: "[rep-weekly] "
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Repo Excellence Program (REP)** — Markdown copy: [`docs/templates/rep-weekly-status.template.md`](https://github.com/blackmalejournal/blackmalejournal/blob/main/docs/templates/rep-weekly-status.template.md)
+
+  - type: input
+    id: week_ending
+    attributes:
+      label: Week ending (YYYY-MM-DD)
+    validations:
+      required: true
+
+  - type: input
+    id: team
+    attributes:
+      label: Team
+    validations:
+      required: true
+
+  - type: input
+    id: owner
+    attributes:
+      label: Owner (name or @handle)
+    validations:
+      required: true
+
+  - type: textarea
+    id: repos_in_scope
+    attributes:
+      label: Repos in scope
+      description: List org/repo entries (one per line).
+      placeholder: |
+        org/repo-a
+        org/repo-b
+    validations:
+      required: true
+
+  - type: dropdown
+    id: rag
+    attributes:
+      label: Overall RAG
+      options:
+        - Green
+        - Amber
+        - Red
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary (2–3 bullets)
+      description: Progress and blockers.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: progress
+    attributes:
+      label: Progress this week
+      options:
+        - label: Baseline controls applied (README, CODEOWNERS, SECURITY.md)
+        - label: Metadata validated (service.yaml / catalog)
+        - label: Branch protections / required checks configured
+        - label: Dependency bot configured or tuned
+        - label: Exception requests filed (if needed)
+
+  - type: textarea
+    id: scorecard
+    attributes:
+      label: Scorecard movement
+      description: |
+        Table or bullets: repo, last score, current score, delta, notes.
+    validations:
+      required: false
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and blockers
+      description: Table optional — risk, impact, owner, mitigation, ETA.
+    validations:
+      required: false
+
+  - type: textarea
+    id: exceptions
+    attributes:
+      label: Exceptions and decisions
+      description: New/closed exception IDs, decisions needed from Platform or Security.
+    validations:
+      required: false
+
+  - type: textarea
+    id: next_week
+    attributes:
+      label: Next week plan
+      description: Numbered list of top 3 items.
+    validations:
+      required: false
+
+  - type: textarea
+    id: help_needed
+    attributes:
+      label: Help needed
+      description: Calls out for Platform, Security, or Leadership.
+    validations:
+      required: false

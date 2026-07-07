@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#3B2417"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="4" fill="#C0281F"/>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="626" width="1200" height="4" fill="#C0281F"/>
+
+  <!-- Diagonal texture lines (subtle) -->
+  <line x1="0" y1="200" x2="200" y2="0" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="0" y1="400" x2="400" y2="0" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="0" y1="630" x2="630" y2="0" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="200" y1="630" x2="830" y2="0" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="400" y1="630" x2="1030" y2="0" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="600" y1="630" x2="1200" y2="30" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="800" y1="630" x2="1200" y2="230" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="1000" y1="630" x2="1200" y2="430" stroke="#2a1a10" stroke-width="1"/>
+
+  <!-- Brand mark — star + pen nib, centered -->
+  <g transform="translate(510, 160)">
+    <!-- Pen nib -->
+    <path d="M90 0 C81 27 68.4 36 63 50.4 L90 39.6 L117 50.4 C111.6 36 99 27 90 0Z" fill="#E8DCC8"/>
+    <circle cx="90" cy="32.4" r="5.4" fill="#F2EDE4"/>
+    <!-- Star body -->
+    <path d="M90 50.4 L109.8 104.4 L171 104.4 L120.6 133.2 L140.4 180 L90 158.4 L39.6 180 L59.4 133.2 L9 104.4 L70.2 104.4 Z" fill="#C0281F"/>
+  </g>
+
+  <!-- Eyebrow label -->
+  <text
+    x="600" y="410"
+    text-anchor="middle"
+    font-family="Impact, 'Arial Black', sans-serif"
+    font-size="14"
+    letter-spacing="8"
+    fill="#B8986A"
+  >THE BLACK MALE JOURNAL</text>
+
+  <!-- Horizontal rule -->
+  <rect x="500" y="425" width="200" height="1" fill="#C0281F" opacity="0.6"/>
+
+  <!-- Placeholder label -->
+  <text
+    x="600" y="475"
+    text-anchor="middle"
+    font-family="Impact, 'Arial Black', sans-serif"
+    font-size="36"
+    letter-spacing="6"
+    fill="#F2EDE4"
+    opacity="0.4"
+  >COVER IMAGE</text>
+</svg>

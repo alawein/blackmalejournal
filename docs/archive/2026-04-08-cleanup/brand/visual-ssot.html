@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BMJ Visual SSOT — gallery</title>
+  <!-- Fonts approximate app loading (Next injects variables in production). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../src/styles/brand.css" />
+  <style>
+    :root {
+      --font-bebas-neue: "Bebas Neue", Impact, sans-serif;
+      --font-libre-baskerville: "Libre Baskerville", Georgia, serif;
+      --font-oswald: "Oswald", "Arial Narrow", sans-serif;
+      --font-ibm-plex-mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bmj-black);
+      color: var(--bmj-text-body);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; }
+    .banner {
+      border: 1px solid var(--bmj-border-strong);
+      border-left: 4px solid var(--bmj-red);
+      background: var(--bmj-surface-panel);
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+    .banner h1 {
+      font-family: var(--font-display);
+      font-weight: var(--weight-display);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-section);
+      color: var(--bmj-text-strong);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.05;
+      margin: 0 0 0.5rem;
+    }
+    .banner .tagline {
+      font-family: var(--font-label);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-label-lg);
+      color: var(--bmj-tan);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    .banner .meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-stamp);
+      color: var(--bmj-text-muted);
+      margin-top: 1rem;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: var(--weight-display);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-section);
+      color: var(--bmj-white);
+      font-size: 1.75rem;
+      border-top: 2px solid var(--bmj-red);
+      padding-top: 1.25rem;
+      margin: 3rem 0 1rem;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: var(--bmj-text-muted);
+      margin-bottom: 1.5rem;
+      max-width: 70ch;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+    .tile {
+      background: var(--bmj-surface-panel);
+      border: 1px solid var(--bmj-border-subtle);
+      padding: 1rem;
+      text-align: center;
+    }
+    .tile img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 0.75rem;
+      max-height: 120px;
+      object-fit: contain;
+    }
+    .tile .lbl {
+      font-family: var(--font-mono);
+      font-size: var(--text-stamp);
+      color: var(--bmj-amber);
+      word-break: break-all;
+    }
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .sw {
+      border: 1px solid var(--bmj-border-subtle);
+      overflow: hidden;
+    }
+    .sw-c {
+      height: 72px;
+    }
+    .sw-i {
+      padding: 0.65rem 0.75rem;
+      background: var(--bmj-surface-panel);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--bmj-cream);
+      line-height: 1.35;
+    }
+    .sw-i span { color: var(--bmj-tan); display: block; margin-top: 0.2rem; }
+    .lens-row {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 640px) {
+      .lens-row { grid-template-columns: repeat(5, 1fr); }
+    }
+    .lens {
+      padding: 1rem;
+      background: var(--bmj-surface-panel);
+      border: 1px solid var(--bmj-border-subtle);
+      border-top-width: 4px;
+      font-family: var(--font-label);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      font-size: 0.75rem;
+      color: var(--bmj-text-strong);
+    }
+    .lens.health { border-top-color: var(--bmj-amber); }
+    .lens.politics { border-top-color: var(--bmj-red); }
+    .lens.culture { border-top-color: var(--bmj-tan); }
+    .lens.entertainment { border-top-color: var(--bmj-purple); }
+    .lens.business { border-top-color: var(--bmj-olive); }
+    .lens small {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--bmj-text-muted);
+      margin-top: 0.5rem;
+      font-size: 0.65rem;
+    }
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--bmj-border-subtle);
+      font-size: 0.85rem;
+      color: var(--bmj-text-muted);
+    }
+    footer a { color: var(--bmj-cream); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="banner">
+      <h1>The Black Male Journal</h1>
+      <p class="tagline">Speak the Truth. Navigate the Consequences.</p>
+      <p class="meta">Verbal SSOT: src/lib/seo.ts · Color SSOT: src/styles/brand.css · Lenses: src/lib/lens-theme.ts</p>
+    </div>
+
+    <p class="note">
+      Open this file from a checkout of the repository so paths resolve. Swatch colors read from <strong>brand.css</strong> (runtime token SSOT). For the normative index and Git-friendly images, see <a href="./VISUAL-SSOT.md">VISUAL-SSOT.md</a>.
+    </p>
+
+    <h2>Logos &amp; marks</h2>
+    <div class="grid">
+      <div class="tile">
+        <img src="../../public/logos/primary-color.svg" alt="Primary logo" width="280" height="80" />
+        <div class="lbl">public/logos/primary-color.svg</div>
+      </div>
+      <div class="tile">
+        <img src="../../public/logos/submark-color.svg" alt="Submark" width="120" height="120" />
+        <div class="lbl">public/logos/submark-color.svg</div>
+      </div>
+      <div class="tile">
+        <img src="../../public/logos/favicon-red.svg" alt="Favicon red" width="64" height="64" />
+        <div class="lbl">public/logos/favicon-red.svg</div>
+      </div>
+      <div class="tile">
+        <img src="../../public/favicon.svg" alt="Favicon" width="64" height="64" />
+        <div class="lbl">public/favicon.svg</div>
+      </div>
+      <div class="tile">
+        <img src="../../public/og-image.svg" alt="OG image" width="280" height="147" />
+        <div class="lbl">public/og-image.svg</div>
+      </div>
+    </div>
+
+    <h2>Content placeholders</h2>
+    <div class="grid">
+      <div class="tile"><img src="../../public/placeholders/article.svg" alt="" /><div class="lbl">article.svg</div></div>
+      <div class="tile"><img src="../../public/placeholders/briefing.svg" alt="" /><div class="lbl">briefing.svg</div></div>
+      <div class="tile"><img src="../../public/placeholders/course.svg" alt="" /><div class="lbl">course.svg</div></div>
+      <div class="tile"><img src="../../public/placeholders/handbook.svg" alt="" /><div class="lbl">handbook.svg</div></div>
+      <div class="tile"><img src="../../public/placeholders/dispatch.svg" alt="" /><div class="lbl">dispatch.svg</div></div>
+      <div class="tile"><img src="../../public/placeholders/download.svg" alt="" /><div class="lbl">download.svg</div></div>
+      <div class="tile"><img src="../../public/placeholders/cover.svg" alt="" /><div class="lbl">cover.svg</div></div>
+    </div>
+
+    <h2>Lenses (taxonomy + accent)</h2>
+    <div class="lens-row">
+      <div class="lens health">Health / Wellness<small>health · bmj-amber</small></div>
+      <div class="lens politics">Politics / Law<small>politics · bmj-red</small></div>
+      <div class="lens culture">Culture / Ideology<small>culture · bmj-tan</small></div>
+      <div class="lens entertainment">Entertainment / Tech<small>entertainment · bmj-purple</small></div>
+      <div class="lens business">Business / Finance<small>business · bmj-olive</small></div>
+    </div>
+
+    <h2>Color tokens (from brand.css)</h2>
+    <div class="swatch-grid" id="swatches"></div>
+
+    <footer>
+      Extended palette specimen: <a href="./color-system.html">color-system.html</a> · Brand rules: <a href="./invariants.md">invariants.md</a>
+    </footer>
+  </div>
+  <script>
+    var tokens = [
+      ['--bmj-black', 'Core'],
+      ['--bmj-cream', 'Core'],
+      ['--bmj-red', 'Core'],
+      ['--bmj-amber', 'Core'],
+      ['--bmj-brown', 'Core'],
+      ['--bmj-tan', 'Core'],
+      ['--bmj-white', 'Core'],
+      ['--bmj-paper', 'Accent'],
+      ['--bmj-deep-black', 'Accent'],
+      ['--bmj-crimson', 'Accent'],
+      ['--bmj-medium-brown', 'Accent'],
+      ['--bmj-olive', 'Accent'],
+      ['--bmj-gold', 'Accent'],
+      ['--bmj-purple', 'Accent'],
+    ];
+    var root = document.documentElement;
+    var grid = document.getElementById('swatches');
+    tokens.forEach(function (t) {
+      var name = t[0];
+      var cat = t[1];
+      var hex = getComputedStyle(root).getPropertyValue(name).trim();
+      var el = document.createElement('div');
+      el.className = 'sw';
+      el.innerHTML =
+        '<div class="sw-c" style="background:' + name + '"></div>' +
+        '<div class="sw-i">' +
+        name +
+        '<span>' +
+        hex +
+        ' · ' +
+        cat +
+        '</span></div>';
+      grid.appendChild(el);
+    });
+  </script>
+</body>
+</html>

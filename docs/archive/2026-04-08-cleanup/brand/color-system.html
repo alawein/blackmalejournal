@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMJ Color System Reference</title>
+<style>
+  /* ─── Reset ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ─── Page ─── */
+  body {
+    background: #0D0C0B;
+    color: #E8DCC8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ─── Grain overlay (global) ─── */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.09;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ─── Section styling ─── */
+  .section {
+    margin-bottom: 4rem;
+    border-top: 3px solid #C0281F;
+    padding-top: 2rem;
+  }
+
+  .section-title {
+    font-family: 'Impact', 'Arial Black', 'Trebuchet MS', sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #F2EDE4;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #B8986A;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── Swatch grid ─── */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .swatch {
+    border: 1px solid #3B2417;
+  }
+
+  .swatch-color {
+    height: 80px;
+    position: relative;
+  }
+
+  .swatch-info {
+    padding: 0.75rem;
+    background: #1C130E;
+  }
+
+  .swatch-hex {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    color: #F2EDE4;
+    font-weight: bold;
+  }
+
+  .swatch-var {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #C8852A;
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  .swatch-tailwind {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #B8986A;
+    display: block;
+    margin-top: 0.15rem;
+  }
+
+  .swatch-usage {
+    font-size: 0.8rem;
+    color: #E8DCC8;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+  }
+
+  .palette-label {
+    font-family: 'Impact', 'Arial Black', 'Trebuchet MS', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #B8986A;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+  .palette-label:first-of-type {
+    margin-top: 0;
+  }
+
+  /* ─── Typography section ─── */
+  .type-specimen {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #3B2417;
+    background: #1C130E;
+  }
+
+  .type-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: #B8986A;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #3B2417;
+    padding-bottom: 0.5rem;
+  }
+
+  .type-display {
+    font-family: 'Impact', 'Arial Black', 'Trebuchet MS', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #F2EDE4;
+    line-height: 1.1;
+  }
+
+  .type-body {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #E8DCC8;
+    line-height: 1.7;
+  }
+
+  .type-label-text {
+    font-family: 'Trebuchet MS', 'Arial Narrow', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #E8DCC8;
+  }
+
+  .type-mono {
+    font-family: 'Courier New', monospace;
+    color: #B8986A;
+  }
+
+  .type-size-note {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: #B8986A;
+    margin-top: 0.5rem;
+  }
+
+  /* ─── Article cards ─── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .article-card {
+    border: 1px solid #3B2417;
+    background: #1C130E;
+    overflow: hidden;
+  }
+
+  .card-image {
+    height: 180px;
+    background: #3B2417;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(13, 12, 11, 0.15) 2px,
+      rgba(13, 12, 11, 0.15) 4px
+    );
+    mix-blend-mode: multiply;
+  }
+
+  .card-image-health {
+    background: linear-gradient(135deg, #3B2417 0%, #416100 100%);
+    filter: contrast(1.2) grayscale(0.3);
+  }
+
+  .card-image-philosophy {
+    background: linear-gradient(135deg, #3B2417 0%, #5D3F2E 100%);
+    filter: contrast(1.2) grayscale(0.3);
+  }
+
+  .card-image-politics {
+    background: linear-gradient(135deg, #3B2417 0%, #712414 100%);
+    filter: contrast(1.2) grayscale(0.3);
+  }
+
+  .card-body {
+    padding: 1.25rem;
+  }
+
+  .card-badge {
+    display: inline-block;
+    font-family: 'Trebuchet MS', 'Arial Narrow', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid;
+    margin-bottom: 0.75rem;
+  }
+
+  .badge-health {
+    color: #416100;
+    border-color: #416100;
+  }
+
+  .badge-philosophy {
+    color: #C8852A;
+    border-color: #C8852A;
+  }
+
+  .badge-politics {
+    color: #C0281F;
+    border-color: #C0281F;
+  }
+
+  .card-title {
+    font-family: 'Impact', 'Arial Black', 'Trebuchet MS', sans-serif;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #F2EDE4;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-excerpt {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.9rem;
+    color: #E8DCC8;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    opacity: 0.85;
+  }
+
+  .card-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #B8986A;
+    letter-spacing: 0.05em;
+    border-top: 1px solid #3B2417;
+    padding-top: 0.75rem;
+  }
+
+  /* ─── Brand mark grid ─── */
+  .mark-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .mark-group {
+    text-align: center;
+  }
+
+  .mark-group-title {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: #B8986A;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .mark-variants {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 1.5rem;
+    background: #1C130E;
+    border: 1px solid #3B2417;
+    min-height: 100px;
+  }
+
+  .mark-variant {
+    text-align: center;
+  }
+
+  .mark-variant span {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: #B8986A;
+    margin-top: 0.5rem;
+  }
+
+  /* ─── Image treatment section ─── */
+  .treatment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .treatment-card {
+    border: 1px solid #3B2417;
+    background: #1C130E;
+    padding: 1.25rem;
+  }
+
+  .treatment-name {
+    font-family: 'Impact', 'Arial Black', 'Trebuchet MS', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #F2EDE4;
+    margin-bottom: 0.5rem;
+  }
+
+  .treatment-usage {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.85rem;
+    color: #E8DCC8;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .treatment-preview {
+    height: 100px;
+    background: #3B2417;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .treatment-preview img,
+  .treatment-preview-inner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .preview-halftone {
+    background: linear-gradient(135deg, #5D3F2E, #B8986A, #3B2417);
+    filter: contrast(1.2) grayscale(0.3);
+    mix-blend-mode: multiply;
+  }
+
+  .preview-halftone-heavy {
+    background: linear-gradient(135deg, #5D3F2E, #B8986A, #3B2417);
+    filter: contrast(1.6) grayscale(1) brightness(1.1);
+    mix-blend-mode: multiply;
+  }
+
+  .preview-duotone {
+    background: linear-gradient(135deg, #5D3F2E, #B8986A, #3B2417);
+    filter: grayscale(1) contrast(1.3);
+    mix-blend-mode: multiply;
+  }
+
+  code, pre {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+  }
+
+  pre {
+    background: #0D0C0B;
+    border: 1px solid #3B2417;
+    padding: 1rem;
+    overflow-x: auto;
+    color: #B8986A;
+    line-height: 1.5;
+  }
+
+  pre .css-prop { color: #E8DCC8; }
+  pre .css-val { color: #C8852A; }
+  pre .css-class { color: #C0281F; }
+  pre .css-comment { color: #5D3F2E; }
+
+  /* ─── Do / Don't section ─── */
+  .dodont-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .dodont-card {
+    padding: 1.5rem;
+    border: 2px solid;
+  }
+
+  .dodont-do {
+    border-color: #416100;
+    background: rgba(65, 97, 0, 0.08);
+  }
+
+  .dodont-dont {
+    border-color: #C0281F;
+    background: rgba(192, 40, 31, 0.08);
+  }
+
+  .dodont-label {
+    font-family: 'Impact', 'Arial Black', 'Trebuchet MS', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .dodont-do .dodont-label { color: #416100; }
+  .dodont-dont .dodont-label { color: #C0281F; }
+
+  .dodont-example {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #3B2417;
+  }
+
+  .dodont-caption {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #B8986A;
+    margin-top: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    body { padding: 1rem; }
+    .swatch-grid { grid-template-columns: 1fr 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+    .dodont-grid { grid-template-columns: 1fr; }
+    .mark-grid { grid-template-columns: repeat(2, 1fr); }
+    .treatment-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .swatch-grid { grid-template-columns: 1fr; }
+    .mark-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── Page header ─── */
+  .page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid #C0281F;
+  }
+
+  .page-header h1 {
+    font-family: 'Impact', 'Arial Black', 'Trebuchet MS', sans-serif;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #F2EDE4;
+    margin-bottom: 0.25rem;
+  }
+
+  .page-header .tagline {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #C8852A;
+    margin-bottom: 1rem;
+  }
+
+  .page-header .meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #B8986A;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PAGE HEADER
+     ════════════════════════════════════════════════════════════════ -->
+<header class="page-header">
+  <div style="margin-bottom: 1rem;">
+    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/>
+      <circle cx="50" cy="18" r="3" fill="#F2EDE4"/>
+      <path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#C0281F"/>
+    </svg>
+  </div>
+  <h1>The Black Male Journal</h1>
+  <p class="tagline">"Speak the Truth. Navigate the Consequences."</p>
+  <p class="meta">COLOR SYSTEM &amp; VISUAL IDENTITY REFERENCE &mdash; v1.0</p>
+</header>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     1. COLOR PALETTE
+     ════════════════════════════════════════════════════════════════ -->
+<section class="section">
+  <h2 class="section-title">1. Color Palette</h2>
+  <p class="section-subtitle">src/styles/brand.css &mdash; all colors as CSS custom properties</p>
+
+  <div class="palette-label">Core Palette (7 colors)</div>
+  <div class="swatch-grid">
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #0D0C0B; border-bottom: 1px solid #3B2417;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#0D0C0B</span>
+        <span class="swatch-var">--bmj-black</span>
+        <span class="swatch-tailwind">bg-bmj-black</span>
+        <p class="swatch-usage">Primary background. Site-wide dark ground. The default surface.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #E8DCC8;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#E8DCC8</span>
+        <span class="swatch-var">--bmj-cream</span>
+        <span class="swatch-tailwind">text-bmj-cream</span>
+        <p class="swatch-usage">Primary text on dark backgrounds. Body copy, paragraphs, general content.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #C0281F;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#C0281F</span>
+        <span class="swatch-var">--bmj-red</span>
+        <span class="swatch-tailwind">bg-bmj-red</span>
+        <p class="swatch-usage">Accents, brand mark, borders, CTAs. The commanding color. Use for urgency.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #C8852A;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#C8852A</span>
+        <span class="swatch-var">--bmj-amber</span>
+        <span class="swatch-tailwind">bg-bmj-amber</span>
+        <p class="swatch-usage">Quote cards, highlights, philosophy lens accent. Warm editorial emphasis.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #3B2417;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#3B2417</span>
+        <span class="swatch-var">--bmj-brown</span>
+        <span class="swatch-tailwind">bg-bmj-brown</span>
+        <p class="swatch-usage">Secondary backgrounds, card surfaces, borders, separators.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #B8986A;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#B8986A</span>
+        <span class="swatch-var">--bmj-tan</span>
+        <span class="swatch-tailwind">text-bmj-tan</span>
+        <p class="swatch-usage">Metadata, dates, captions, secondary information. Recedes visually.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #F2EDE4;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#F2EDE4</span>
+        <span class="swatch-var">--bmj-white</span>
+        <span class="swatch-tailwind">text-bmj-white</span>
+        <p class="swatch-usage">Maximum contrast text. Headlines, hero titles, emphasis. Not raw #FFF.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="palette-label">Expanded Accents (7 colors)</div>
+  <div class="swatch-grid">
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #F0DDBC;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#F0DDBC</span>
+        <span class="swatch-var">--bmj-paper</span>
+        <span class="swatch-tailwind">bg-bmj-paper</span>
+        <p class="swatch-usage">Lighter paper ground. Card backgrounds, alternate surfaces.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #1C130E; border-bottom: 1px solid #3B2417;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#1C130E</span>
+        <span class="swatch-var">--bmj-deep-black</span>
+        <span class="swatch-tailwind">bg-bmj-deep-black</span>
+        <p class="swatch-usage">Heavier typographic weight. Card insets, pen nib fill, code blocks.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #712414;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#712414</span>
+        <span class="swatch-var">--bmj-crimson</span>
+        <span class="swatch-tailwind">bg-bmj-crimson</span>
+        <p class="swatch-usage">Politics / philosophy section accent. Deep crimson, not red.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #5D3F2E;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#5D3F2E</span>
+        <span class="swatch-var">--bmj-medium-brown</span>
+        <span class="swatch-tailwind">bg-bmj-medium-brown</span>
+        <p class="swatch-usage">Culture / editorial section accent. Warm mid-tone.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #416100;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#416100</span>
+        <span class="swatch-var">--bmj-olive</span>
+        <span class="swatch-tailwind">bg-bmj-olive</span>
+        <p class="swatch-usage">Health / wellness section accent. Earthy green, never bright.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #C77A0E;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#C77A0E</span>
+        <span class="swatch-var">--bmj-gold</span>
+        <span class="swatch-tailwind">bg-bmj-gold</span>
+        <p class="swatch-usage">Finance / business section accent. Warm gold, distinguished from amber.</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background: #554978;"></div>
+      <div class="swatch-info">
+        <span class="swatch-hex">#554978</span>
+        <span class="swatch-var">--bmj-purple</span>
+        <span class="swatch-tailwind">bg-bmj-purple</span>
+        <p class="swatch-usage">Technology section accent. DEFERRED until taxonomy expansion. Use with restraint.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     2. TYPOGRAPHY HIERARCHY
+     ════════════════════════════════════════════════════════════════ -->
+<section class="section">
+  <h2 class="section-title">2. Typography Hierarchy</h2>
+  <p class="section-subtitle">font-display / font-body / font-label / font-mono &mdash; system approximations shown</p>
+
+  <!-- Display / Headline -->
+  <div class="type-specimen">
+    <div class="type-label">Display &mdash; Highrise (Impact/Arial Black approximation) &mdash; always ALL CAPS</div>
+    <div class="type-display" style="font-size: 3rem; margin-bottom: 0.5rem;">H1 &mdash; Weekend Briefing</div>
+    <div class="type-display" style="font-size: 2.25rem; margin-bottom: 0.5rem;">H2 &mdash; The Lens of Power</div>
+    <div class="type-display" style="font-size: 1.75rem; margin-bottom: 0.5rem;">H3 &mdash; Field Notes</div>
+    <div class="type-display" style="font-size: 1.35rem; margin-bottom: 0.5rem;">H4 &mdash; From the Chairman</div>
+    <div class="type-display" style="font-size: 1.1rem; margin-bottom: 0.5rem;">H5 &mdash; Section Subheading</div>
+    <div class="type-display" style="font-size: 0.9rem;">H6 &mdash; Minor Heading</div>
+    <div class="type-size-note">font-family: var(--font-display) &mdash; Highrise, Bebas Neue, Impact fallback</div>
+    <div class="type-size-note">H1: 3rem / H2: 2.25rem / H3: 1.75rem / H4: 1.35rem / H5: 1.1rem / H6: 0.9rem</div>
+  </div>
+
+  <!-- Body -->
+  <div class="type-specimen">
+    <div class="type-label">Body &mdash; Libre Baskerville (Georgia approximation) &mdash; editorial serif</div>
+    <p class="type-body" style="font-size: 1.125rem; margin-bottom: 1rem;">
+      The revolution will not be focus-grouped. It will not be A/B tested, workshopped through
+      a design sprint, or validated by a product manager. The revolution will be typeset in
+      sharp serifs on dark paper, printed at 3 a.m. in a basement, and stapled to telephone
+      poles by dawn.
+    </p>
+    <p class="type-body" style="font-size: 1rem;">
+      Body text at 1rem (16px). This is the default reading size for articles and long-form
+      content. Line-height 1.7 for comfortable reading on dark backgrounds. Georgia stands in
+      for Libre Baskerville in this static reference.
+    </p>
+    <div class="type-size-note">font-family: var(--font-body) &mdash; Libre Baskerville, Linux Libertine, Georgia fallback</div>
+    <div class="type-size-note">Article body: 1.125rem / Default body: 1rem / line-height: 1.7</div>
+  </div>
+
+  <!-- Label -->
+  <div class="type-specimen">
+    <div class="type-label">Labels &mdash; Oswald (Trebuchet MS approximation) &mdash; uppercase, tracked wide</div>
+    <div class="type-label-text" style="font-size: 0.875rem; margin-bottom: 0.5rem;">CATEGORY LABEL &mdash; 0.875rem</div>
+    <div class="type-label-text" style="font-size: 0.75rem; margin-bottom: 0.5rem;">BUTTON TEXT &mdash; 0.75rem</div>
+    <div class="type-label-text" style="font-size: 0.65rem;">NAV ITEM &mdash; 0.65rem</div>
+    <div class="type-size-note">font-family: var(--font-label) &mdash; Oswald, Trebuchet MS fallback</div>
+    <div class="type-size-note">Always uppercase. letter-spacing: 0.15em&ndash;0.2em. Used for badges, nav, buttons.</div>
+  </div>
+
+  <!-- Mono -->
+  <div class="type-specimen">
+    <div class="type-label">Mono &mdash; IBM Plex Mono (Courier New approximation) &mdash; dates, issue numbers</div>
+    <div class="type-mono" style="font-size: 0.875rem; margin-bottom: 0.5rem;">ISSUE NO. 047 &mdash; 2026-03-17</div>
+    <div class="type-mono" style="font-size: 0.75rem; margin-bottom: 0.5rem;">Published: March 17, 2026 &bull; 8 min read</div>
+    <div class="type-mono" style="font-size: 0.65rem;">THE CHAIRMAN &bull; WEEKEND BRIEFING</div>
+    <div class="type-size-note">font-family: var(--font-mono) &mdash; IBM Plex Mono, Courier New fallback</div>
+    <div class="type-size-note">Used for dates, issue numbers, metadata, code snippets.</div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     3. ARTICLE CARD EXAMPLES
+     ════════════════════════════════════════════════════════════════ -->
+<section class="section">
+  <h2 class="section-title">3. Article Card Examples</h2>
+  <p class="section-subtitle">Three lenses &mdash; health / philosophy / politics &mdash; with correct badge and accent colors</p>
+
+  <div class="card-grid">
+
+    <!-- Health card -->
+    <div class="article-card">
+      <div class="card-image card-image-health"></div>
+      <div class="card-body">
+        <span class="card-badge badge-health">HEALTH</span>
+        <h3 class="card-title">The Discipline of the Body</h3>
+        <p class="card-excerpt">
+          Training is not self-improvement. It is the construction of capacity &mdash; the deliberate
+          architecture of a body that can sustain the work.
+        </p>
+        <div class="card-meta">THE CHAIRMAN &bull; MARCH 12, 2026 &bull; 6 MIN READ</div>
+      </div>
+    </div>
+
+    <!-- Philosophy card -->
+    <div class="article-card">
+      <div class="card-image card-image-philosophy"></div>
+      <div class="card-body">
+        <span class="card-badge badge-philosophy">PHILOSOPHY</span>
+        <h3 class="card-title">Purpose Is Not Given, It Is Forged</h3>
+        <p class="card-excerpt">
+          The crisis of modern masculinity is not a crisis of identity. It is a crisis
+          of purpose &mdash; a generation told to want without being taught to build.
+        </p>
+        <div class="card-meta">THE CHAIRMAN &bull; MARCH 8, 2026 &bull; 9 MIN READ</div>
+      </div>
+    </div>
+
+    <!-- Politics card -->
+    <div class="article-card">
+      <div class="card-image card-image-politics"></div>
+      <div class="card-body">
+        <span class="card-badge badge-politics">POLITICS</span>
+        <h3 class="card-title">Power Concedes Nothing</h3>
+        <p class="card-excerpt">
+          The systems that govern Black life were not designed with Black life in mind.
+          Understanding this is the first act of political clarity.
+        </p>
+        <div class="card-meta">THE CHAIRMAN &bull; MARCH 3, 2026 &bull; 11 MIN READ</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     4. BRAND MARK
+     ════════════════════════════════════════════════════════════════ -->
+<section class="section">
+  <h2 class="section-title">4. Brand Mark</h2>
+  <p class="section-subtitle">Star + pen nib &mdash; src/components/brand/BrandMark.tsx &mdash; inline SVG, three color variants at four sizes</p>
+
+  <div style="margin-bottom: 1rem;">
+    <p style="font-size: 0.85rem; color: #B8986A; margin-bottom: 0.5rem;">
+      The pen nib is always <code style="color:#C8852A;">#1C130E</code> (--bmj-deep-black), regardless of the star color.
+      The nib hole is always <code style="color:#C8852A;">#F2EDE4</code> (--bmj-white). The star body takes the color prop.
+    </p>
+  </div>
+
+  <!-- Red variant -->
+  <div style="margin-bottom: 1.5rem;">
+    <div class="mark-group-title">Red variant (default &mdash; #C0281F)</div>
+    <div class="mark-variants">
+      <div class="mark-variant">
+        <svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#C0281F"/></svg>
+        <span>16px</span>
+      </div>
+      <div class="mark-variant">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#C0281F"/></svg>
+        <span>32px</span>
+      </div>
+      <div class="mark-variant">
+        <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#C0281F"/></svg>
+        <span>64px</span>
+      </div>
+      <div class="mark-variant">
+        <svg width="128" height="128" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#C0281F"/></svg>
+        <span>128px</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cream variant -->
+  <div style="margin-bottom: 1.5rem;">
+    <div class="mark-group-title">Cream variant (#E8DCC8)</div>
+    <div class="mark-variants">
+      <div class="mark-variant">
+        <svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#E8DCC8"/></svg>
+        <span>16px</span>
+      </div>
+      <div class="mark-variant">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#E8DCC8"/></svg>
+        <span>32px</span>
+      </div>
+      <div class="mark-variant">
+        <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#E8DCC8"/></svg>
+        <span>64px</span>
+      </div>
+      <div class="mark-variant">
+        <svg width="128" height="128" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#E8DCC8"/></svg>
+        <span>128px</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- White variant -->
+  <div style="margin-bottom: 1.5rem;">
+    <div class="mark-group-title">White variant (#F2EDE4)</div>
+    <div class="mark-variants">
+      <div class="mark-variant">
+        <svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#F2EDE4"/></svg>
+        <span>16px</span>
+      </div>
+      <div class="mark-variant">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#F2EDE4"/></svg>
+        <span>32px</span>
+      </div>
+      <div class="mark-variant">
+        <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#F2EDE4"/></svg>
+        <span>64px</span>
+      </div>
+      <div class="mark-variant">
+        <svg width="128" height="128" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/><circle cx="50" cy="18" r="3" fill="#F2EDE4"/><path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#F2EDE4"/></svg>
+        <span>128px</span>
+      </div>
+    </div>
+  </div>
+
+  <pre><span class="css-comment">&lt;!-- Usage in React --&gt;</span>
+<span class="css-prop">import</span> { BrandMark } <span class="css-prop">from</span> <span class="css-val">'@/components/brand/BrandMark'</span>;
+
+<span class="css-comment">&lt;!-- Default (red, 32px) --&gt;</span>
+&lt;BrandMark /&gt;
+
+<span class="css-comment">&lt;!-- Custom size and color --&gt;</span>
+&lt;BrandMark <span class="css-prop">size</span>=<span class="css-val">{64}</span> <span class="css-prop">color</span>=<span class="css-val">"#E8DCC8"</span> /&gt;
+
+<span class="css-comment">&lt;!-- Pen nib is ALWAYS #1C130E (deep-black), nib hole ALWAYS #F2EDE4 --&gt;</span>
+<span class="css-comment">&lt;!-- Only the star body takes the color prop --&gt;</span></pre>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     5. IMAGE TREATMENT REFERENCE
+     ════════════════════════════════════════════════════════════════ -->
+<section class="section">
+  <h2 class="section-title">5. Image Treatment Reference</h2>
+  <p class="section-subtitle">src/styles/globals.css &mdash; three treatment variants via TreatedImage component</p>
+
+  <div class="treatment-grid">
+
+    <!-- Halftone -->
+    <div class="treatment-card">
+      <div class="treatment-name">Halftone (editorial)</div>
+      <div class="treatment-usage">Standard editorial images. Article covers, card images. Partial desaturation with contrast boost.</div>
+      <div class="treatment-preview">
+        <div class="treatment-preview-inner preview-halftone"></div>
+      </div>
+      <pre><span class="css-comment">/* .halftone — editorial variant */</span>
+<span class="css-class">.halftone</span> {
+  <span class="css-prop">filter</span>: <span class="css-val">contrast(1.2) grayscale(0.3)</span>;
+  <span class="css-prop">mix-blend-mode</span>: <span class="css-val">multiply</span>;
+}</pre>
+    </div>
+
+    <!-- Halftone Heavy -->
+    <div class="treatment-card">
+      <div class="treatment-name">Halftone Heavy (portrait)</div>
+      <div class="treatment-usage">Author portraits, profile images. Full newsprint treatment with dot overlay. Wrap in a <code>.halftone-dots</code> parent.</div>
+      <div class="treatment-preview">
+        <div class="treatment-preview-inner preview-halftone-heavy"></div>
+      </div>
+      <pre><span class="css-comment">/* .halftone-heavy — portrait variant */</span>
+<span class="css-class">.halftone-heavy</span> {
+  <span class="css-prop">filter</span>: <span class="css-val">contrast(1.6) grayscale(1) brightness(1.1)</span>;
+  <span class="css-prop">mix-blend-mode</span>: <span class="css-val">multiply</span>;
+}
+
+<span class="css-comment">/* .halftone-dots — dot overlay on parent */</span>
+<span class="css-class">.halftone-dots::after</span> {
+  <span class="css-prop">content</span>: <span class="css-val">""</span>;
+  <span class="css-prop">position</span>: <span class="css-val">absolute</span>;
+  <span class="css-prop">inset</span>: <span class="css-val">0</span>;
+  <span class="css-prop">background</span>: <span class="css-val">radial-gradient(circle, #0D0C0B 1px, transparent 1px)</span>;
+  <span class="css-prop">background-size</span>: <span class="css-val">4px 4px</span>;
+  <span class="css-prop">opacity</span>: <span class="css-val">0.3</span>;
+}</pre>
+    </div>
+
+    <!-- Duotone -->
+    <div class="treatment-card">
+      <div class="treatment-name">Duotone (hero)</div>
+      <div class="treatment-usage">Hero banners, full-width images. Complete grayscale with contrast, multiply-blended over brand background color.</div>
+      <div class="treatment-preview">
+        <div class="treatment-preview-inner preview-duotone"></div>
+      </div>
+      <pre><span class="css-comment">/* .duotone — hero variant */</span>
+<span class="css-comment">/* Parent must have a brand bg color */</span>
+<span class="css-class">.duotone</span> {
+  <span class="css-prop">filter</span>: <span class="css-val">grayscale(1) contrast(1.3)</span>;
+  <span class="css-prop">mix-blend-mode</span>: <span class="css-val">multiply</span>;
+}</pre>
+    </div>
+
+  </div>
+
+  <div style="margin-top: 1.5rem; padding: 1rem; border: 1px solid #3B2417; background: #1C130E;">
+    <div style="font-family: 'Courier New', monospace; font-size: 0.75rem; color: #B8986A; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">React Usage</div>
+    <pre><span class="css-prop">import</span> { TreatedImage } <span class="css-prop">from</span> <span class="css-val">'@/components/ui/TreatedImage'</span>;
+
+<span class="css-comment">&lt;!-- Editorial (article covers) --&gt;</span>
+&lt;TreatedImage <span class="css-prop">variant</span>=<span class="css-val">"editorial"</span> <span class="css-prop">src</span>=<span class="css-val">"..."</span> <span class="css-prop">alt</span>=<span class="css-val">"..."</span> /&gt;
+
+<span class="css-comment">&lt;!-- Portrait (author photos) --&gt;</span>
+&lt;TreatedImage <span class="css-prop">variant</span>=<span class="css-val">"portrait"</span> <span class="css-prop">src</span>=<span class="css-val">"..."</span> <span class="css-prop">alt</span>=<span class="css-val">"..."</span> /&gt;
+
+<span class="css-comment">&lt;!-- Hero (full-width banners) --&gt;</span>
+&lt;TreatedImage <span class="css-prop">variant</span>=<span class="css-val">"hero"</span> <span class="css-prop">src</span>=<span class="css-val">"..."</span> <span class="css-prop">alt</span>=<span class="css-val">"..."</span> /&gt;</pre>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     6. DO / DON'T
+     ════════════════════════════════════════════════════════════════ -->
+<section class="section">
+  <h2 class="section-title">6. Do / Don't</h2>
+  <p class="section-subtitle">Brand invariants &mdash; prohibited patterns vs correct patterns</p>
+
+  <!-- Corners -->
+  <div class="dodont-grid" style="margin-bottom: 1.5rem;">
+    <div class="dodont-card dodont-do">
+      <div class="dodont-label">DO &mdash; Sharp corners</div>
+      <div class="dodont-example" style="background: #1C130E;">
+        <div style="background: #3B2417; border: 1px solid #C0281F; padding: 1rem; border-radius: 2px;">
+          <span style="font-family: 'Impact', sans-serif; text-transform: uppercase; color: #F2EDE4; letter-spacing: 0.1em;">Sharp Card</span>
+          <p style="font-size: 0.85rem; color: #E8DCC8; margin-top: 0.5rem;">border-radius: 2px or 4px max. Militant, deliberate.</p>
+        </div>
+      </div>
+      <div class="dodont-caption">rounded-sm (2px) or rounded (4px) only</div>
+    </div>
+    <div class="dodont-card dodont-dont">
+      <div class="dodont-label">DON'T &mdash; Rounded corners</div>
+      <div class="dodont-example" style="background: #1C130E;">
+        <div style="background: #3B2417; border: 1px solid #C0281F; padding: 1rem; border-radius: 16px;">
+          <span style="font-family: 'Impact', sans-serif; text-transform: uppercase; color: #F2EDE4; letter-spacing: 0.1em;">Soft Card</span>
+          <p style="font-size: 0.85rem; color: #E8DCC8; margin-top: 0.5rem;">rounded-md, rounded-lg, rounded-xl &mdash; all prohibited.</p>
+        </div>
+      </div>
+      <div class="dodont-caption">rounded-md and above are PROHIBITED</div>
+    </div>
+  </div>
+
+  <!-- Shadows -->
+  <div class="dodont-grid" style="margin-bottom: 1.5rem;">
+    <div class="dodont-card dodont-do">
+      <div class="dodont-label">DO &mdash; Flat surfaces</div>
+      <div class="dodont-example" style="background: #1C130E;">
+        <div style="background: #3B2417; border: 1px solid #5D3F2E; padding: 1rem;">
+          <span style="font-family: 'Impact', sans-serif; text-transform: uppercase; color: #F2EDE4; letter-spacing: 0.1em;">Flat Element</span>
+          <p style="font-size: 0.85rem; color: #E8DCC8; margin-top: 0.5rem;">Border for definition. No elevation. No depth illusion.</p>
+        </div>
+      </div>
+      <div class="dodont-caption">Use borders (1px solid) for visual separation</div>
+    </div>
+    <div class="dodont-card dodont-dont">
+      <div class="dodont-label">DON'T &mdash; Drop shadows</div>
+      <div class="dodont-example" style="background: #1C130E;">
+        <div style="background: #3B2417; padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);">
+          <span style="font-family: 'Impact', sans-serif; text-transform: uppercase; color: #F2EDE4; letter-spacing: 0.1em;">Shadowed Element</span>
+          <p style="font-size: 0.85rem; color: #E8DCC8; margin-top: 0.5rem;">shadow-sm, shadow-md, shadow-lg &mdash; all prohibited.</p>
+        </div>
+      </div>
+      <div class="dodont-caption">shadow-* classes are PROHIBITED on brand components</div>
+    </div>
+  </div>
+
+  <!-- Gradients -->
+  <div class="dodont-grid" style="margin-bottom: 1.5rem;">
+    <div class="dodont-card dodont-do">
+      <div class="dodont-label">DO &mdash; Solid color fills</div>
+      <div class="dodont-example" style="background: #1C130E;">
+        <div style="background: #C0281F; padding: 1rem;">
+          <span style="font-family: 'Trebuchet MS', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; color: #F2EDE4; font-size: 0.8rem;">SUBSCRIBE NOW</span>
+        </div>
+        <div style="background: #3B2417; padding: 1rem; margin-top: 0.5rem;">
+          <span style="font-family: 'Trebuchet MS', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; color: #E8DCC8; font-size: 0.8rem;">LEARN MORE</span>
+        </div>
+      </div>
+      <div class="dodont-caption">Flat, solid brand colors. Opacity for fades, never gradients.</div>
+    </div>
+    <div class="dodont-card dodont-dont">
+      <div class="dodont-label">DON'T &mdash; Gradients</div>
+      <div class="dodont-example" style="background: #1C130E;">
+        <div style="background: linear-gradient(135deg, #C0281F, #C8852A); padding: 1rem; border-radius: 8px;">
+          <span style="font-family: 'Trebuchet MS', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; color: #F2EDE4; font-size: 0.8rem;">SUBSCRIBE NOW</span>
+        </div>
+        <div style="background: linear-gradient(135deg, #554978, #416100); padding: 1rem; margin-top: 0.5rem; border-radius: 8px;">
+          <span style="font-family: 'Trebuchet MS', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; color: #F2EDE4; font-size: 0.8rem;">LEARN MORE</span>
+        </div>
+      </div>
+      <div class="dodont-caption">bg-gradient-* classes are PROHIBITED. No color transitions.</div>
+    </div>
+  </div>
+
+  <!-- Colors -->
+  <div class="dodont-grid" style="margin-bottom: 1.5rem;">
+    <div class="dodont-card dodont-do">
+      <div class="dodont-label">DO &mdash; Brand palette only</div>
+      <div class="dodont-example" style="background: #0D0C0B; padding: 1rem;">
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <div style="width: 40px; height: 40px; background: #0D0C0B; border: 1px solid #3B2417;"></div>
+          <div style="width: 40px; height: 40px; background: #E8DCC8;"></div>
+          <div style="width: 40px; height: 40px; background: #C0281F;"></div>
+          <div style="width: 40px; height: 40px; background: #C8852A;"></div>
+          <div style="width: 40px; height: 40px; background: #3B2417;"></div>
+          <div style="width: 40px; height: 40px; background: #B8986A;"></div>
+          <div style="width: 40px; height: 40px; background: #F2EDE4;"></div>
+        </div>
+      </div>
+      <div class="dodont-caption">Only --bmj-* colors from brand.css. Dark, warm, militant.</div>
+    </div>
+    <div class="dodont-card dodont-dont">
+      <div class="dodont-label">DON'T &mdash; Pastels, blue, neon</div>
+      <div class="dodont-example" style="background: #0D0C0B; padding: 1rem;">
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <div style="width: 40px; height: 40px; background: #87CEEB;"></div>
+          <div style="width: 40px; height: 40px; background: #FFB6C1;"></div>
+          <div style="width: 40px; height: 40px; background: #98FB98;"></div>
+          <div style="width: 40px; height: 40px; background: #3B82F6;"></div>
+          <div style="width: 40px; height: 40px; background: #00FF41;"></div>
+          <div style="width: 40px; height: 40px; background: #E879F9;"></div>
+          <div style="width: 40px; height: 40px; background: #FFFFFF;"></div>
+        </div>
+      </div>
+      <div class="dodont-caption">Pastels, blue, neon, raw #FFF &mdash; all PROHIBITED.</div>
+    </div>
+  </div>
+
+  <!-- Glassmorphism -->
+  <div class="dodont-grid" style="margin-bottom: 1.5rem;">
+    <div class="dodont-card dodont-do">
+      <div class="dodont-label">DO &mdash; Grain texture overlay</div>
+      <div class="dodont-example" style="background: #1C130E; position: relative; overflow: hidden;">
+        <div style="padding: 1rem; position: relative; z-index: 1;">
+          <span style="font-family: Georgia, serif; color: #E8DCC8;">Grain texture is applied globally via <code style="color: #C8852A;">.grain::after</code>. It adds grit and print authenticity.</span>
+        </div>
+        <div style="position: absolute; inset: 0; background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E&quot;); opacity: 0.15; pointer-events: none;"></div>
+      </div>
+      <div class="dodont-caption">Grain overlay at 0.09 opacity. Print-culture texture.</div>
+    </div>
+    <div class="dodont-card dodont-dont">
+      <div class="dodont-label">DON'T &mdash; Glassmorphism</div>
+      <div class="dodont-example" style="background: linear-gradient(135deg, #3B2417, #554978); position: relative; overflow: hidden;">
+        <div style="padding: 1rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;">
+          <span style="font-family: Georgia, serif; color: #F2EDE4;">Frosted glass effects, backdrop-blur, translucent panels &mdash; this is SaaS, not revolution.</span>
+        </div>
+      </div>
+      <div class="dodont-caption">backdrop-blur-* is PROHIBITED (except minimal nav scroll state)</div>
+    </div>
+  </div>
+
+  <!-- Hover states -->
+  <div class="dodont-grid">
+    <div class="dodont-card dodont-do">
+      <div class="dodont-label">DO &mdash; Hover increases weight</div>
+      <div class="dodont-example" style="background: #1C130E; padding: 1rem;">
+        <div style="border: 1px solid #C0281F; padding: 0.75rem; background: #C0281F; display: inline-block;">
+          <span style="font-family: 'Trebuchet MS', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; color: #F2EDE4; font-size: 0.8rem;">HOVERED STATE</span>
+        </div>
+        <p style="font-size: 0.8rem; color: #B8986A; margin-top: 0.75rem;">Hover fills background, adds border, increases visual weight.</p>
+      </div>
+      <div class="dodont-caption">Hover should INCREASE visual weight or clarity</div>
+    </div>
+    <div class="dodont-card dodont-dont">
+      <div class="dodont-label">DON'T &mdash; Hover softens</div>
+      <div class="dodont-example" style="background: #1C130E; padding: 1rem;">
+        <div style="padding: 0.75rem; background: rgba(192, 40, 31, 0.3); display: inline-block; border-radius: 8px;">
+          <span style="font-family: 'Trebuchet MS', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(242, 237, 228, 0.5); font-size: 0.8rem;">HOVERED STATE</span>
+        </div>
+        <p style="font-size: 0.8rem; color: #B8986A; margin-top: 0.75rem;">Opacity reduction, color lightening, fading text &mdash; prohibited.</p>
+      </div>
+      <div class="dodont-caption">Hover that reduces opacity or softens text is PROHIBITED</div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════════════ -->
+<footer style="text-align: center; padding: 3rem 0 2rem; border-top: 3px solid #C0281F; margin-top: 2rem;">
+  <div style="margin-bottom: 1rem;">
+    <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 0 C45 15, 38 20, 35 28 L50 22 L65 28 C62 20, 55 15, 50 0Z" fill="#1C130E"/>
+      <circle cx="50" cy="18" r="3" fill="#F2EDE4"/>
+      <path d="M50 28 L61 58 L95 58 L67 74 L78 100 L50 82 L22 100 L33 74 L5 58 L39 58 Z" fill="#C0281F"/>
+    </svg>
+  </div>
+  <p style="font-family: 'Courier New', monospace; font-size: 0.75rem; color: #B8986A; letter-spacing: 0.1em;">
+    THE BLACK MALE JOURNAL &mdash; COLOR SYSTEM REFERENCE
+  </p>
+  <p style="font-family: 'Courier New', monospace; font-size: 0.65rem; color: #5D3F2E; letter-spacing: 0.05em; margin-top: 0.25rem;">
+    Source of truth: src/styles/brand.css &bull; docs/brand/invariants.md
+  </p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+/* src/styles/brand.css */
+/* ─── BMJ Brand Design Tokens ─────────────────────────────── */
+
+/* Color palette */
+:root {
+  /* ─── Core palette (unchanged) ─── */
+  --bmj-black:  #0D0C0B;
+  --bmj-cream:  #E8DCC8;
+  --bmj-red:    #C0281F;
+  --bmj-amber:  #C8852A;
+  --bmj-brown:  #3B2417;
+  --bmj-tan:    #B8986A;
+  --bmj-white:  #F2EDE4;
+
+  /* ─── Expanded accent palette (from designer package 2026-03-17) ─── */
+  /* These are sectional/thematic accents — use sparingly per art-direction-spec.md */
+  --bmj-paper:        #F0DDBC;  /* Lighter paper ground — backgrounds, cards */
+  --bmj-deep-black:   #1C130E;  /* Near-black — heavier typographic weight */
+  --bmj-crimson:      #712414;  /* Deep crimson — politics accent */
+  --bmj-medium-brown: #5D3F2E;  /* Medium brown — culture/editorial accent */
+  --bmj-olive:        #416100;  /* Olive green — health/wellness accent */
+  --bmj-gold:         #C77A0E;  /* Warm gold — finance/business accent */
+  --bmj-purple:       #554978;  /* Muted purple — technology accent (use with restraint) */
+
+  /* Font family references (values set by next/font CSS variables) */
+  --font-display: var(--font-bebas-neue), 'Bebas Neue', sans-serif;
+  --font-body:    var(--font-libre-baskerville), 'Libre Baskerville', 'Linux Libertine', serif;
+  --font-label:   var(--font-oswald), 'Oswald', sans-serif;
+  --font-mono:    var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  --font-typewriter: var(--font-typewriter), 'Courier Prime', 'Courier New', Courier, monospace;
+
+  /* ─── Typography scale tokens ─── */
+
+  /* Tracking (letter-spacing) scale */
+  --tracking-display:   0.04em;   /* card titles, compact display headings */
+  --tracking-section:   0.06em;   /* page titles, section headers */
+  --tracking-wordmark:  0.08em;   /* logo/wordmark text */
+  --tracking-label:     0.18em;   /* buttons, nav links, standard UI labels */
+  --tracking-label-lg:  0.24em;   /* navbar tagline, intermediate labels */
+  --tracking-label-wide: 0.28em;  /* meta stamps, dates */
+  --tracking-label-xl:  0.32em;   /* editorial kickers */
+  --tracking-label-max: 0.4em;    /* hero identifiers, max-emphasis labels */
+
+  /* Sub-xs font sizes (below Tailwind's text-xs = 12px) */
+  --text-micro: 10px;   /* smallest UI text: taglines, kicker overlines */
+  --text-stamp: 11px;   /* editorial kickers, meta stamps */
+
+  /* Line heights */
+  --leading-article: 1.8;   /* long-form article body paragraphs */
+
+  /* Display font weight — Highrise ships 400 (regular) and 700 (bold) */
+  --weight-display: 400;
+
+  /* Grain overlay */
+  --grain-opacity: 0.09;
+  --texture-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+
+  /* Semantic surfaces */
+  --bmj-surface-canvas: var(--bmj-black);
+  --bmj-surface-panel: var(--bmj-deep-black);
+  --bmj-surface-panel-strong: var(--bmj-brown);
+  --bmj-surface-paper: var(--bmj-paper);
+
+  /* Semantic text and rule colors */
+  --bmj-text-strong: var(--bmj-white);
+  --bmj-text-body: rgba(232, 220, 200, 0.84);
+  --bmj-text-muted: rgba(184, 152, 106, 0.82);
+  --bmj-text-subtle: rgba(184, 152, 106, 0.64);
+  --bmj-border-subtle: rgba(184, 152, 106, 0.18);
+  --bmj-border-strong: rgba(184, 152, 106, 0.32);
+  --bmj-border-command: rgba(192, 40, 31, 0.42);
+  --bmj-feature-overlay: rgba(13, 12, 11, 0.76);
+
+  /* Spacing scale */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+
+  /* Max-width scale */
+  --width-content: 1200px;
+  --width-article:  720px;
+  --width-wide:    1440px;
+
+  /* ─── Shadow & Depth Tokens ─── */
+  
+  /* Elevation shadows — increasing depth */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.45), 0 6px 10px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5), 0 15px 20px rgba(0, 0, 0, 0.35);
+  
+  /* Brand glow effects */
+  --shadow-glow-red: 0 0 20px rgba(192, 40, 31, 0.15), 0 0 40px rgba(192, 40, 31, 0.08);
+  --shadow-glow-amber: 0 0 20px rgba(200, 133, 42, 0.15), 0 0 40px rgba(200, 133, 42, 0.08);
+  
+  /* Card shadows */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(184, 152, 106, 0.08);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(184, 152, 106, 0.12);
+
+  /* ─── Transition Tokens ─── */
+  
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-slow: 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-dramatic: 500ms cubic-bezier(0, 0, 0.2, 1);
+
+  /* ─── Z-Index Scale ─── */
+  
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+  --z-notification: 800;
+  --z-grain: 9999;
+}

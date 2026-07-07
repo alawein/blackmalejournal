@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <rect width="800" height="450" fill="#3B2417"/>
+  <rect x="0" y="0" width="800" height="3" fill="#C0281F"/>
+  <rect x="0" y="447" width="800" height="3" fill="#C0281F"/>
+  <line x1="0" y1="150" x2="150" y2="0" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="0" y1="300" x2="300" y2="0" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="0" y1="450" x2="450" y2="0" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="200" y1="450" x2="650" y2="0" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="400" y1="450" x2="800" y2="50" stroke="#2a1a10" stroke-width="1"/>
+  <line x1="600" y1="450" x2="800" y2="250" stroke="#2a1a10" stroke-width="1"/>
+  <g transform="translate(340, 100)">
+    <path d="M60 0 C54 18 45.6 24 42 33.6 L60 26.4 L78 33.6 C74.4 24 66 18 60 0Z" fill="#E8DCC8"/>
+    <circle cx="60" cy="21.6" r="3.6" fill="#F2EDE4"/>
+    <path d="M60 33.6 L73.2 69.6 L114 69.6 L80.4 88.8 L93.6 120 L60 105.6 L26.4 120 L39.6 88.8 L6 69.6 L46.8 69.6 Z" fill="#C0281F"/>
+  </g>
+  <text x="400" y="280" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="12" letter-spacing="6" fill="#B8986A">THE BLACK MALE JOURNAL</text>
+  <rect x="330" y="290" width="140" height="1" fill="#C0281F" opacity="0.6"/>
+  <text x="400" y="330" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="28" letter-spacing="4" fill="#F2EDE4" opacity="0.3">DISPATCH</text>
+</svg>

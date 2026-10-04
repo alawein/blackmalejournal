@@ -20,6 +20,9 @@ jobs:
     name: Lint, Type Check, Test, Build
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    permissions:
+      contents: read
+      actions: write
 
     steps:
       - uses: actions/checkout@v6
@@ -89,6 +92,8 @@ jobs:
     needs: quality
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v6

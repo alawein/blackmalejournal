@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        **Repo Excellence Program (REP)** — [standards hub](https://github.com/blackmalejournal/blackmalejournal/blob/main/docs/standards/README.md)
+        **Repo Excellence Program (REP)** — [standards hub](https://github.com/blackmalejournal/blackmalejournal/blob/main/README.md#operating-guides)
 
         Use this form for pilot intake. Markdown copy: [`docs/templates/rep-pilot-nomination.template.md`](https://github.com/blackmalejournal/blackmalejournal/blob/main/docs/templates/rep-pilot-nomination.template.md)
 

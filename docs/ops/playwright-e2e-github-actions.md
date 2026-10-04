@@ -10,7 +10,7 @@ last-verified: 2026-04-11
 
 This guide describes how to wire **repository secrets** so CI can run Supabase-backed Playwright tests. Use a **dedicated dev or staging Supabase project** and **smoke-test accounts** only—never production customer data.
 
-**Related:** [env-vars.md](env-vars.md) (variable list), [`tests/README.md`](../../tests/README.md), [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml), [`playwright.config.ts`](../../playwright.config.ts), [`tests/e2e/auth-flow.spec.ts`](../../tests/e2e/auth-flow.spec.ts).
+**Related:** [env-vars.md](env-vars.md) (variable list), [test layout](../../README.md#files), [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml), [`playwright.config.ts`](../../playwright.config.ts), [`tests/e2e/auth-flow.spec.ts`](../../tests/e2e/auth-flow.spec.ts).
 
 ---
 

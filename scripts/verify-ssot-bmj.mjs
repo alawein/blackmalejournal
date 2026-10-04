@@ -1,29 +1,32 @@
-/**
- * Ensures docs/ssot-bmj matches the expected BMJ mirror layout (README + bmj-*.md).
- * Run in CI after sync from Downloads SSOT.
- */
-import fs from "fs";
-import path from "path";
+/** Validate the canonical documents and runtime sources used by this repository. */
+import fs from 'fs';
+import path from 'path';
 
-const docs = path.join(process.cwd(), "docs", "ssot-bmj");
-const readme = path.join(docs, "README.md");
+const inputs = [
+  'README.md',
+  'AGENTS.md',
+  'docs/BMJ-SSOT.md',
+  'docs/ARCHITECTURE.md',
+  'docs/ops/env-vars.md',
+  'docs/brand/invariants.md',
+  'docs/brand/visual-ssot.md',
+  'src/styles/brand.css',
+  'tailwind.config.ts',
+  'src/lib/seo.ts',
+  'src/lib/supabase/types.ts',
+  'src/lib/paths.ts',
+  'src/lib/membership.ts',
+];
 
-if (!fs.existsSync(readme)) {
-  console.error(`Missing ${readme}`);
+const failures = inputs.filter((relative) => {
+  const target = path.join(process.cwd(), relative);
+  if (!fs.existsSync(target)) return true;
+  const info = fs.lstatSync(target);
+  return !info.isFile() || info.isSymbolicLink() || info.size === 0;
+});
+
+if (failures.length > 0) {
+  console.error(`Missing, empty, or nonregular canonical input(s): ${failures.join(', ')}`);
   process.exit(1);
 }
-
-const names = fs.readdirSync(docs);
-const bmjMd = names.filter(
-  (f) => f.startsWith("bmj-") && f.endsWith(".md"),
-);
-
-if (bmjMd.length < 5) {
-  console.error(
-    `Expected at least 5 bmj-*.md files under docs/ssot-bmj, found ${bmjMd.length}:`,
-    bmjMd,
-  );
-  process.exit(1);
-}
-
-console.log(`OK: docs/ssot-bmj has README.md and ${bmjMd.length} bmj-*.md file(s).`);
+console.log(`OK: ${inputs.length} canonical documents and source files are present.`);

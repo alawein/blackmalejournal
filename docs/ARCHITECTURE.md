@@ -78,37 +78,12 @@ public/
   fonts/               Self-hosted Highrise typeface
 ```
 
-## Repository layout — monorepo root
+## Repository layout
 
-This section is the **curated map** of what lives at the repo root and how **`docs/`** is organized by lane. It complements the application tree above and [`AGENTS.md`](../AGENTS.md) (top-level governance domains). **Do not** treat this as an exhaustive file listing; for a shallow on-disk snapshot run `npm run docs:layout`.
-
-### Root entries
-
-| Path | Role |
-|------|------|
-| [`AGENTS.md`](../AGENTS.md) | Normative repo governance (domains, invariants, protocol). |
-| [`CLAUDE.md`](../CLAUDE.md) | Assistant and contributor project instructions. |
-| `.github/` | CI workflows, Issue templates, PR template, governance verify inputs. |
-| `docs/` | Committed documentation — see **Documentation lanes** below and [`README.md`](README.md). |
-| `public/` | Static assets (logos, placeholders, fonts, textures). |
-| `scripts/` | Automation — [`scripts/README.md`](../scripts/README.md) (verify, seeds, layout printer). |
-| `src/` | Next.js application (see **Directory Structure** above). |
-| `supabase/` | Local config, migrations, seed SQL. |
-| `tests/` | Jest + Playwright — layout: [`tests/README.md`](../tests/README.md). |
-
-### Documentation lanes (`docs/`)
-
-Each lane has a **README.md** entry point (naming rules: [`CONTRIBUTING.md`](CONTRIBUTING.md) — *File naming — documentation*). Cross-org REP reference modules live under **`standards/`**; BMJ product/deep docs live in root handbooks and lanes like **`ops/`**, **`brand/`**.
-
-| Lane | Entry | Contents |
-|------|--------|----------|
-| Audits | [`audits/README.md`](audits/README.md) | Audit reports and archive. |
-| Brand | [`brand/README.md`](brand/README.md) | Invariants, art direction, palette references. |
-| Operations | [`ops/README.md`](ops/README.md) | Runbooks, env vars SSOT, launch/release SOPs. |
-| Standards | [`standards/README.md`](standards/README.md) | Agent knowledge protocol. |
-| Archive | [`archive/2026-04-08-cleanup/`](archive/2026-04-08-cleanup/README.md) | Historical artifacts (deployment, beautification, REP governance, session notes). |
-
-**BMJ comprehensive SSOT:** [`BMJ-SSOT.md`](BMJ-SSOT.md) — single entry for what BMJ is, what we are building, where truth lives, and what is next. **Application-only depth:** section *Directory Structure* in this file.
+The [repository README](../README.md#files) owns the file map and
+[operating-guide index](../README.md#operating-guides). This document owns the
+application architecture and data flows. Historical inputs remain references;
+completed implementation records are available in Git history.
 
 ## Request Flow
 

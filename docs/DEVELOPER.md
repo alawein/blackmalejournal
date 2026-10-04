@@ -9,46 +9,19 @@ last-verified: 2026-04-08
 
 > Getting started with The Black Male Journal codebase.
 
-## Prerequisites
+## Local setup
 
-- **Node.js** 20+ locally; **CI** uses **22** (Active LTS) — match CI for fewest surprises
-- **npm** (comes with Node.js)
-- **Git**
-
-## Local Setup
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/blackmalejournal/blackmalejournal.git
-   cd blackmalejournal
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-   If you switch between Windows and WSL/Linux/macOS on the same checkout, rerun `npm install` in the active environment before running tests or builds. Next.js ships platform-specific SWC binaries, and a `node_modules` tree installed on one OS can fail on another.
-
-3. Set up environment variables:
-   ```bash
-   cp .env.example .env.local
-   ```
-   Fill in your values — see [docs/ops/env-vars.md](ops/env-vars.md) for details on each variable.
-
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000).
+Follow the [repository README](../README.md#start), using Node.js 22 to match CI.
+Keep each operating system's dependency installation separate: a `node_modules`
+tree installed on Windows cannot supply Linux/macOS native SWC binaries.
 
 ## Repository scripts
 
-Automation and seeds live in [`scripts/`](../scripts/README.md) (verify helpers, Jest counts, repo layout printer, TypeScript seed runners). See that README for `npm run` mappings and `npx tsx` usage.
+Automation and seeds live in [`scripts/`](../README.md#operating-guides) (verify helpers, Jest counts, repo layout printer, TypeScript seed runners). The root README owns command and setup orientation.
 
 ## Testing
 
-**Test layouts:** [tests/README.md](../tests/README.md) (repo root).
+**Test layouts:** [Test layout](../README.md#files) (repo root).
 
 ### Unit & Integration Tests (Jest)
 

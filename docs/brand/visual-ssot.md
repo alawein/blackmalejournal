@@ -103,7 +103,6 @@ Each piece of content uses **exactly one** lens. UI accents come from `LENS_THEM
 
 - **[bmj-palettes-reference.png](bmj-palettes-reference.png)** — palette comparison sheet.
 
-> Archived HTML galleries (`visual-ssot.html`, `color-system.html`) are in `../archive/2026-04-08-cleanup/brand/`.
 
 ---
 

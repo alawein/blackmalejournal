@@ -60,9 +60,9 @@ last-verified: 2026-04-09
 
 ### Documentation layout (canonical)
 
-- **Map:** [README.md](README.md) is the entry point for `docs/`. Link new docs from there when they are a primary entry.
+- **Map:** [README.md](../README.md#operating-guides) is the entry point for `docs/`. Link new docs from there when they are a primary entry.
 - **Root handbooks:** short, stable, `UPPERCASE.md` filenames only at `docs/` root — not inside lane folders.
-- **Lane folders:** use **lowercase** directory names (`ops/`, `brand/`, `audits/`). Multi-word directories use **kebab-case** if needed. Each lane should have a **README.md** entry point (see [ARCHITECTURE.md](ARCHITECTURE.md) — *Repository layout — monorepo root*).
+- **Lane folders:** use **lowercase** directory names (`ops/`, `brand/`). Multi-word directories use **kebab-case** if needed. Use the repository README as the shared index; do not add duplicate lane READMEs.
 - **Repo root map (non-docs):** same section in [ARCHITECTURE.md](ARCHITECTURE.md); shallow tree: `npm run docs:layout`.
 - **Living counts:** `npm run docs:inventory` — Markdown totals and bucket breakdown (not duplicated in prose).
 

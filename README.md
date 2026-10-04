@@ -1,128 +1,88 @@
 # The Black Male Journal
 
-An independent media house and revolutionary masculinist platform. Built with Next.js 16, TypeScript, Tailwind CSS, Supabase, and Stripe. Deployed on Vercel.
+An independent editorial platform built with Next.js 16, TypeScript, Supabase, and Stripe. It
+publishes articles, briefings, dispatches, handbooks, courses, and downloads, with a member portal
+and an administrator CMS.
 
-**Tagline:** Speak the Truth. Navigate the Consequences.
+**Study Well. Speak the Truth. Navigate the Consequences.**
 
-## Quick Start
+## Start
 
-```bash
-git clone https://github.com/blackmalejournal/blackmalejournal.git
-cd blackmalejournal
-npm install
-cp .env.example .env.local   # fill in values — see docs/ops/env-vars.md
-npm run dev                   # http://localhost:3000
+Use Node.js 22, matching CI:
+
+```sh
+npm ci
 ```
 
-## Commands
+Copy `.env.example` to `.env.local`, provide local values from the
+[environment reference](docs/ops/env-vars.md), then run:
 
-| Command | Purpose |
-|---------|---------|
-| `npm run dev` | Development server |
-| `npm run build` | Production build |
-| `npm run lint` | ESLint |
-| `npm test` | Jest (136 suites, 1185 tests) |
-| `npm run test:e2e` | Playwright E2E |
-| `npm run verify:docs-links` | Validate relative links under `docs/` (CI) |
-| `npm run verify:docs-frontmatter` | Require YAML frontmatter on `docs/ops/`, `docs/brand/`, and root `docs/*.md` (CI) |
-| `npm run verify:docs-ops-frontmatter` | Ops lane only (same checker) |
-| `npm run verify:docs-brand-frontmatter` | Brand lane only (same checker) |
-| `npm run verify:docs-root-frontmatter` | Root `docs/*.md` only (same checker) |
-| `npm run docs:inventory` | Print Markdown counts by bucket (sprawl / inventory) |
-| `npm run docs:duplicate-audit` | Heuristic near-duplicate pairs under `docs/` (informational; optional `--fail`) |
-| `npm run docs:duplicate-audit:ci` | Short duplicate-audit report (used in CI; `--max-report=5`) |
-| `npm run docs:layout` | Shallow directory tree of key folders (see `docs/ARCHITECTURE.md`) |
-| `npx tsc --noEmit` | TypeScript check |
-
-## Architecture at a Glance
-
-```
-src/
-  app/
-    (public)/     Public pages (articles, briefings, academy, blog, etc.)
-    (auth)/       Login, signup, member portal, admin panel
-    api/          API routes (Stripe, contact, newsletter, search)
-  components/     UI primitives, brand, content cards, layout, admin
-  lib/            Supabase client/queries, Stripe config, membership, SEO
-  styles/         Brand CSS variables, global styles
-public/
-  logos/          Brand identity assets
-  placeholders/   Content-type fallback images
-  textures/       CSS background patterns
-  fonts/          Self-hosted typefaces
+```sh
+npm run dev
 ```
 
-**Database:** Supabase (PostgreSQL + Auth + Storage)
-**Payments:** Stripe (subscriptions + one-time donations)
-**Email:** Resend (transactional)
-**Analytics:** Plausible (optional)
+Open <http://localhost:3000>. Content and authentication depend on Supabase; payment flows depend on
+Stripe. Real provider configuration and production state require separate verification. Keep secrets
+and real environment values out of Git. See the [developer guide](docs/DEVELOPER.md) for deeper
+setup and [troubleshooting](docs/TROUBLESHOOTING.md) for known local issues.
 
-## Content Types
+## Files
 
-| Type | Route | Description |
-|------|-------|-------------|
-| Articles | `/articles` | Long-form editorial, categorized by lens |
-| Briefings | `/briefings` | Weekend Briefing — flagship magazine format |
-| Dispatches | `/blog` | Short-form posts (blog route serves dispatches) |
-| Handbooks | `/handbooks` | Deep-dive reference guides |
-| Courses | `/academy` | Structured learning with lessons |
-| Downloads | `/downloads` | Downloadable resources (PDFs, templates) |
+- `src/app/`: public pages, authentication, member/admin areas, and API routes.
+- `src/components/`, `src/lib/`: UI, content queries, access control, payments, email, SEO, and
+  shared helpers.
+- `src/styles/brand.css`, `tailwind.config.ts`: canonical brand tokens and their opacity-compatible
+  Tailwind mirrors.
+- `supabase/`: database configuration, migrations, and seed SQL.
+- `public/`: original logos, images, textures, and fonts; retain font licenses.
+- `tests/`: Jest tests by feature and Playwright browser tests in `tests/e2e/`.
+- `scripts/`: reusable verification, layout, inventory, and seed utilities.
+- `docs/`: architecture, product reference, brand guidance, and operating procedures.
+- `.github/`, `.claude/`, `.cursor/`: CI, contributor templates, and tool configuration.
 
-## Membership Tiers
+Runtime values belong to their source files. [AGENTS.md](AGENTS.md) owns contributor instructions;
+[CLAUDE.md](CLAUDE.md) points there. The [architecture guide](docs/ARCHITECTURE.md) explains data
+flow and the [product reference](docs/BMJ-SSOT.md) preserves mission and product context. Completed
+plans, audits, delivery summaries, templates, and session transcripts are available in Git history.
 
-- **Free** — public articles, briefing previews, video gallery, academy
-- **Basic** ($9/mo) — full briefing archive, select handbooks
-- **Premium** ($19/mo) — everything: all handbooks, downloads, early access
+## Checks
 
-## Documentation
+```sh
+npm run lint
+npx tsc --noEmit
+npm test
+npm run build
+npm run verify:ssot-bmj
+npm run verify:docs-links
+npm run verify:docs-frontmatter
+```
 
-| Document | Audience | Purpose |
-|----------|----------|---------|
-| **[docs/BMJ-SSOT.md](docs/BMJ-SSOT.md)** | **Everyone** | **Single comprehensive SSOT** — product, program, roadmap, where truth lives (**share this file**) |
-| [docs/README.md](docs/README.md) | Everyone | Map of `docs/`, lanes, and governance entry points |
-| [docs/DEVELOPER.md](docs/DEVELOPER.md) | Developers | Local setup, testing, deployment |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | System design, data flow, schema, **repo root layout** |
-| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Contributors | Code style, PR process, conventions |
-| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Everyone | Common issues and fixes |
-| [docs/ops/chairman-consistency-reference.md](docs/ops/chairman-consistency-reference.md) | Admin/Operator | Domains, emails, handles, brand strings, lenses, consistency checklists |
-| [docs/ops/env-vars.md](docs/ops/env-vars.md) | DevOps | Environment variable reference |
-| [docs/brand/invariants.md](docs/brand/invariants.md) | Designers | Visual identity rules |
-| [docs/standards/README.md](docs/standards/README.md) | Platform / multi-repo leads | Optional **Repo Excellence Program** reference (templates, rollout, governance) — not required for routine BMJ app work |
-| [CLAUDE.md](CLAUDE.md) | AI assistants | Project instructions for Claude Code |
-| [tests/README.md](tests/README.md) | Developers | Test folder layout and commands |
-| [scripts/README.md](scripts/README.md) | Developers | Verify scripts, seeds, `docs:layout` |
+The SSOT check validates canonical documents and source locations. Documentation checks validate
+local links and required metadata. `npm run secrets:check` retains credential scanning;
+`npm run test:e2e` runs Playwright. Authenticated browser projects require separate
+admin/member/basic/premium account variables: see
+[browser CI setup](docs/ops/playwright-e2e-github-actions.md).
 
-## For the Admin (Non-Technical Operator)
+Seed test accounts only into local/staging databases; `npm run check:no-test-users` is required
+before production deployment. `scripts/seed-all.ts` and `scripts/seed.ts` use the Supabase
+service-role credential, which must remain server-only.
 
-The admin panel at `/admin` is a complete no-code CMS. You can:
+## Operating guides
 
-- Write, edit, schedule, and publish all content types through the UI
-- Upload cover images via drag-and-drop
-- Manage members and subscriptions
-- Handle contact form submissions
-- Export subscriber lists
-- Monitor editorial pipeline, audience metrics, and billing health
+- [Environment variables](docs/ops/env-vars.md) and [external configuration](docs/DEFERRALS.md).
+- [Publishing](docs/ops/publishing-sop.md), [member billing](docs/ops/member-billing-sop.md), and
+  [inbox/subscriber operations](docs/ops/inbox-subscriber-sop.md).
+- [Release order](docs/ops/release-sequence.md), [backup/restore](docs/ops/backup-restore.md), and
+  [secret rotation](docs/ops/secret-rotation.md).
+- [Chairman consistency](docs/ops/chairman-consistency-reference.md).
+- [Brand invariants](docs/brand/invariants.md), [visual identity](docs/brand/visual-ssot.md),
+  [art direction](docs/brand/art-direction-spec.md), and
+  [publication design](docs/brand/movement-literature-spec.md).
 
-**Start here:** [Chairman Consistency Reference](docs/ops/chairman-consistency-reference.md)
-
-## Emergency: If the Developer Is Unavailable
-
-1. **The site runs itself.** Vercel auto-deploys from `main`. Supabase handles the database. Stripe handles billing. No manual intervention needed for day-to-day operations.
-
-2. **Content management** is fully UI-driven via `/admin`. No code changes needed to publish, edit, or manage content.
-
-3. **If something breaks:**
-   - Check [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for common fixes
-   - Check Vercel dashboard for deployment status
-   - Check Supabase dashboard for database health
-   - Check Stripe dashboard for billing issues
-
-4. **If you need a developer:**
-   - This repo is a standard Next.js 16 app — any Next.js developer can work on it
-   - All architecture decisions are documented in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-   - All conventions are in [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) and [CLAUDE.md](CLAUDE.md)
-   - Environment setup takes ~10 minutes with [docs/DEVELOPER.md](docs/DEVELOPER.md)
+Unique historical brand references, Patreon strategy, nonprofit setup, and security material remain
+as source inputs. Their dates do not establish present account state or authorize any action. Live
+schemas, brand tokens, and current operating guides govern implementation.
 
 ## License
 
-Proprietary. All rights reserved.
+Proprietary. All rights reserved. Third-party fonts and assets retain their licenses.

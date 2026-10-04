@@ -1,12 +1,12 @@
 ---
 title: BMJ — Single Source of Truth
-authority: canonical
-status: canonical
+authority: reference
+status: reference
 audience: [chairman, operators, engineers, agents, partners, designers]
-last-verified: 2026-04-09
+last-updated: 2026-10-04
 ---
 
-# The Black Male Journal — Single Source of Truth
+# The Black Male Journal: product reference
 
 **Study Well. Speak the Truth. Navigate the Consequences.**
 
@@ -285,24 +285,13 @@ Every warning maps to a reachable admin route so the operator can clear risk wit
 
 ---
 
-## 12 — Roadmap
+## 12: Implementation and external setup
 
-### Shipped
-
-| Priority | Plan |
-|----------|------|
-| P1 | Search enhancement |
-| P2 | Member bookmarks |
-| P3 | Email campaigns (admin) |
-| — | Admin command center |
-
-### In Progress
-
-| Item | Status |
-|------|--------|
-| P4 — Repo cleanup / UI audit | Residual layers per plan |
-
-External blockers (dashboards, DNS, Stripe products): [`DEFERRALS.md`](DEFERRALS.md)
+Runtime source and tests own implemented behavior. The
+[repository README](../README.md) owns setup, files, and operating-guide links.
+[External configuration](DEFERRALS.md) records provider work separately from
+source implementation; the checkout does not verify present account state.
+Completed audits and plans are available in Git history.
 
 ---
 
@@ -340,11 +329,3 @@ This document duplicates runtime values for human reference. When anything disag
 | Repo process | [`AGENTS.md`](../AGENTS.md), [`CLAUDE.md`](../CLAUDE.md) |
 
 ---
-
-## 16 — Revision Log
-
-| Date | Note |
-|------|------|
-| 2026-04-09 | Rewrote as clean, structured SSOT. Updated tagline to "Study Well. Speak the Truth. Navigate the Consequences." Updated emails to .org domain. Expanded tier entitlements with download rules. Added IBM Plex Mono review note. Added §15 Code Authority table. Wired all cross-references as relative links. |
-| 2026-03-31 | Expanded into substantive SSOT: nonprofit/business, tokens, vibe, lenses, services (public/member/admin), dashboard/admin routes, integrations. |
-| 2026-03-31 | Prior: single-file program SSOT. |

@@ -34,7 +34,7 @@ jobs:
       - name: Secrets Check
         run: npm run secrets:check
 
-      - name: Verify BMJ SSOT docs layout
+      - name: Verify canonical documents and source locations
         run: npm run verify:ssot-bmj
 
       - name: Verify docs internal links

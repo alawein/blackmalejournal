@@ -57,8 +57,8 @@ jobs:
       - name: Type Check
         run: npx tsc --noEmit
 
-      - name: npm audit (high-severity and above)
-        run: npm audit --audit-level=high
+      - name: npm audit gate (high-severity and above)
+        run: node scripts/ci-audit.mjs
 
       - name: Unit & Integration Tests
         run: npm test -- --ci --coverage

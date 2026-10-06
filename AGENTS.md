@@ -51,3 +51,5 @@ and any remaining limitations.
 After route moves, clear only the generated `.next` type cache if stale route types block
 validation. On Windows, terminate only the dev-server process you own. Do not replace meaningful
 validation with file-count quotas or duplicated documents.
+
+Branch hygiene: `main` deploys; preserve frozen `v0/*`. Flag inactive topic branches after 7 days and aim to integrate or explicitly park them within 14 days. Delete, archive, or prune only with named owner approval; preserve useful unmerged work and dirty worktrees.

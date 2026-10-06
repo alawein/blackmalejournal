@@ -51,7 +51,7 @@ src/
       queries.ts       All public-facing database queries
       access.ts        Tier-based content access control
       types.ts         TypeScript types for all database tables
-      admin-queries/   Admin CRUD queries — one TS module per domain, barrel via `admin-queries.ts` (service-role client stays in `admin.ts` )
+      admin-queries/   Admin CRUD queries — one TS module per domain, barrel via `admin-queries/index.ts` (service-role client stays in `admin.ts`)
     stripe/
       config.ts        Stripe client, price IDs, tier mapping
       helpers.ts       Checkout session and billing portal creation

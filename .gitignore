@@ -56,13 +56,11 @@ next-env.d.ts
 playwright-report/
 test-results/
 
-# Cursor IDE (local)
-.cursor/
+# Cursor IDE (local files) — rules.md is intentionally tracked
+.cursor/*
+!.cursor/rules.md
 
 # Claude Code personal overrides
 CLAUDE.local.md
 .claude/settings.local.json
 BMJ-SSOT.docx
-
-# Git worktrees
-.worktrees/

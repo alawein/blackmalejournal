@@ -37,7 +37,7 @@
     fill="#B8986A"
   >SPEAK THE TRUTH. NAVIGATE THE CONSEQUENCES.</text>
 
-  <!-- Three lenses -->
+  <!-- Five lenses -->
   <text
     x="600" y="485"
     text-anchor="middle"
@@ -46,5 +46,5 @@
     letter-spacing="5"
     fill="#B8986A"
     opacity="0.7"
-  >HEALTH · PHILOSOPHY · POLITICS</text>
+  >HEALTH · POLITICS · CULTURE · ENTERTAINMENT · BUSINESS</text>
 </svg>

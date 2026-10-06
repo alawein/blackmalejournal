@@ -18,7 +18,7 @@ Next.js 16 (App Router), TypeScript (strict), Tailwind CSS, Supabase, Stripe, Fr
 - Highrise (headlines, ALL-CAPS), Libre Baskerville (body), Oswald (labels), IBM Plex Mono (dates)
 - PROHIBITED: pastels, gradients, blue, neon, rounded corners > 4px, drop shadows, glassmorphism
 - Visual: Militant print-driven editorial -- revolutionary newspapers, political posters
-- Three lenses only: health, philosophy, politics
+- Five lenses: health, politics, culture, entertainment, business (see `src/lib/lens-theme.ts`)
 
 ## Work Style
 

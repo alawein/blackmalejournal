@@ -404,7 +404,7 @@ const briefings = [
     title: 'First Principles',
     slug: 'weekend-briefing-001',
     sections: [
-      { title: 'Why This Exists', body: 'Welcome to the first Weekend Briefing. This is a weekly dispatch designed to cut through the noise and deliver substance. Each issue covers three areas: health, philosophy, and politics — the three lenses through which we examine the Black male experience. No clickbait. No outrage farming. Just ideas worth sitting with.' },
+      { title: 'Why This Exists', body: 'Welcome to the first Weekend Briefing. This is a weekly dispatch designed to cut through the noise and deliver substance. Each issue covers five areas: health, politics, culture, entertainment, and business — the five lenses through which we examine the Black male experience. No clickbait. No outrage farming. Just ideas worth sitting with.' },
       { title: 'The Health Imperative', body: 'Black men die younger than almost every other demographic group in America. Heart disease, hypertension, diabetes — these are not merely medical problems. They are the physical manifestation of systemic stress, food deserts, and a healthcare system that has historically failed us. Taking control of your health is not vanity. It is survival.' },
       { title: 'Required Reading', body: "This week we recommend \"Between the World and Me\" by Ta-Nehisi Coates. Not because it has all the answers, but because it asks the right questions. Pair it with James Baldwin's \"The Fire Next Time\" for a conversation across generations about what it means to inhabit a Black body in America." },
     ],

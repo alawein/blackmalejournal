@@ -10,6 +10,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
@@ -17,6 +18,7 @@ concurrency:
 
 jobs:
   quality:
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
     name: Lint, Type Check, Test, Build
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -86,6 +88,7 @@ jobs:
         with:
           name: coverage
           path: coverage/
+          retention-days: 7
 
   e2e:
     name: E2E Tests

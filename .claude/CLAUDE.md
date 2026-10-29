@@ -9,7 +9,7 @@ source: claude-agent-platform-extender
 
 ## Detected Project Profile
 
-- Root: `/c/Users/mesha/Desktop/Dropbox/GitHub/blackmalejournal/blackmalejournal`
+- Root: the repository root
 - Project type: `node`
 - Stack: `node,typescript`
 - Frameworks: `nextjs,react`

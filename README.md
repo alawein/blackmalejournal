@@ -34,6 +34,8 @@ setup and [troubleshooting](docs/TROUBLESHOOTING.md) for known local issues.
 - `src/styles/brand.css`, `tailwind.config.ts`: canonical brand tokens and their opacity-compatible
   Tailwind mirrors.
 - `supabase/`: database configuration, migrations, and seed SQL.
+- `content/articles/`: public articles as Markdown files, one per post. Copy `_template.md` to add one.
+  Set `ARTICLES_SOURCE=supabase` to read the database instead.
 - `public/`: original logos, images, textures, and fonts; retain font licenses.
 - `tests/`: Jest tests by feature and Playwright browser tests in `tests/e2e/`.
 - `scripts/`: reusable verification, layout, inventory, and seed utilities.

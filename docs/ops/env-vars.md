@@ -45,6 +45,8 @@ last-verified: 2026-04-24
 | `NEXT_PUBLIC_SITE_URL` | Client + Server | `seo.ts`, `auth/actions.ts`, `stripe/helpers.ts`, `donate/route.ts` | Preferred canonical site URL (e.g., `https://blackmalejournal.org` or `https://blackmalejournal.vercel.app`). When unset on Vercel, the app falls back to `VERCEL_PROJECT_PRODUCTION_URL` and then `VERCEL_URL`. |
 | `NEXT_PUBLIC_WHATSAPP_LINK` | Client | `contact/page.tsx` | WhatsApp contact link |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Client | `layout.tsx` | Optional Plausible domain. When set, the analytics script is injected into the root layout. |
+| `ARTICLES_SOURCE` | Server | `lib/content/local-articles.ts`, `lib/supabase/queries/articles.ts` | Optional. Public article pages read Markdown files from `content/articles/` by default. Set to `supabase` to read the `articles` table instead. |
+| `ARTICLES_DIR` | Server | `lib/content/local-articles.ts` | Optional. Folder holding the Markdown articles. Defaults to `content/articles` under the project root. Used by tests. |
 
 ## Sentry (optional — no-op unless DSN is set)
 
@@ -131,5 +133,5 @@ Fork pull requests do not receive repository secrets; E2E continues to use place
 
 - **21 documented variables** for CI parity (5 client-safe, 8 server-only, 8 optional E2E secrets)
 - **Required for the core app:** Supabase (3), Stripe (4), site URL (1)
-- **Optional integrations:** Resend (3), WhatsApp (1), Plausible (1)
+- **Optional integrations:** Resend (3), WhatsApp (1), Plausible (1), article source (2)
 - **Optional local/CI:** E2E credentials (8) — see Local E2E table and GitHub Actions subsection

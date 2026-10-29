@@ -21,6 +21,9 @@ jest.mock('@/lib/supabase/server', () => ({
   }),
 }));
 
+// These tests cover the database path; local files are the default article source.
+process.env.ARTICLES_SOURCE = 'supabase';
+
 // Suppress console.error noise from expected error paths
 jest.spyOn(console, 'error').mockImplementation(() => {});
 

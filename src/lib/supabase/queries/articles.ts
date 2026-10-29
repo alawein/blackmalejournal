@@ -6,6 +6,15 @@ import type {
   Lens,
   AccessTier,
 } from '@/lib/supabase/types';
+import {
+  getLocalArticleBySlug,
+  getLocalArticleTagFacets,
+  getLocalArticles,
+  getLocalArticlesForListing,
+  getLocalFeaturedArticles,
+  getLocalLatestArticles,
+  usesLocalArticles,
+} from '@/lib/content/local-articles';
 import { applyPublicContentVisibility, fetchRows, fetchSingle } from './_shared';
 
 const ARTICLE_LIST_SELECT =
@@ -20,6 +29,7 @@ export async function getArticles(
     tier?: AccessTier;
   } = {},
 ): Promise<Article[]> {
+  if (usesLocalArticles()) return getLocalArticles(options);
   const { lens, tag, limit = 20, offset = 0, tier } = options;
   const supabase = await createClient();
   const nowIso = new Date().toISOString();
@@ -49,6 +59,7 @@ export async function getArticlesForListing(
     tier?: AccessTier;
   } = {},
 ): Promise<ArticleListItem[]> {
+  if (usesLocalArticles()) return getLocalArticlesForListing(options);
   const { lens, tag, limit = 20, offset = 0, tier } = options;
   const supabase = await createClient();
   const nowIso = new Date().toISOString();
@@ -72,6 +83,7 @@ export async function getArticlesForListing(
 export async function getArticleTagFacets(
   options: { lens?: Lens; limit?: number } = {},
 ): Promise<Array<{ tags: string[] }>> {
+  if (usesLocalArticles()) return getLocalArticleTagFacets(options);
   const { lens, limit = 200 } = options;
   const supabase = await createClient();
   const nowIso = new Date().toISOString();
@@ -93,6 +105,7 @@ export async function getArticleTagFacets(
 export const getArticleBySlug = cache(async function getArticleBySlug(
   slug: string,
 ): Promise<Article | null> {
+  if (usesLocalArticles()) return getLocalArticleBySlug(slug);
   const supabase = await createClient();
   const query = applyPublicContentVisibility(
     supabase
@@ -104,6 +117,7 @@ export const getArticleBySlug = cache(async function getArticleBySlug(
 });
 
 export async function getFeaturedArticles(limit = 3): Promise<ArticleListItem[]> {
+  if (usesLocalArticles()) return getLocalFeaturedArticles(limit);
   const supabase = await createClient();
   const query = applyPublicContentVisibility(
     supabase
@@ -118,6 +132,7 @@ export async function getFeaturedArticles(limit = 3): Promise<ArticleListItem[]>
 }
 
 export async function getLatestArticles(limit = 10): Promise<ArticleListItem[]> {
+  if (usesLocalArticles()) return getLocalLatestArticles(limit);
   const supabase = await createClient();
   const query = applyPublicContentVisibility(
     supabase

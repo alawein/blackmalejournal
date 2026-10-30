@@ -1,10 +1,8 @@
 # The Black Male Journal
 
-An independent editorial platform built with Next.js 16, TypeScript, Supabase, and Stripe. It
-publishes articles, briefings, dispatches, handbooks, courses, and downloads, with a member portal
-and an administrator CMS.
-
-**Study Well. Speak the Truth. Navigate the Consequences.**
+Source code for an independent editorial platform, for developers who run or extend it. It is built
+with Next.js 16, TypeScript, Supabase, and Stripe, and includes a member portal and an administrator
+CMS. The repository ships an article template and no published articles.
 
 ## Start
 
@@ -14,10 +12,11 @@ Use Node.js 22, matching CI:
 npm ci
 ```
 
-Copy `.env.example` to `.env.local`, provide local values from the
-[environment reference](docs/ops/env-vars.md), then run:
+Copy the example environment file, fill in local values from the
+[environment reference](docs/ops/env-vars.md), then start the dev server:
 
 ```sh
+cp .env.example .env.local
 npm run dev
 ```
 
@@ -31,21 +30,20 @@ setup and [troubleshooting](docs/TROUBLESHOOTING.md) for known local issues.
 - `src/app/`: public pages, authentication, member/admin areas, and API routes.
 - `src/components/`, `src/lib/`: UI, content queries, access control, payments, email, SEO, and
   shared helpers.
-- `src/styles/brand.css`, `tailwind.config.ts`: canonical brand tokens and their opacity-compatible
+- `src/styles/brand.css`, `tailwind.config.ts`: brand tokens and their opacity-compatible
   Tailwind mirrors.
 - `supabase/`: database configuration, migrations, and seed SQL.
-- `content/articles/`: public articles as Markdown files, one per post. Copy `_template.md` to add one.
-  Set `ARTICLES_SOURCE=supabase` to read the database instead.
+- `content/articles/`: articles as Markdown files, one per post. Only `_template.md` is included; copy
+  it to add one. Set `ARTICLES_SOURCE=supabase` to read the database instead.
 - `public/`: original logos, images, textures, and fonts; retain font licenses.
 - `tests/`: Jest tests by feature and Playwright browser tests in `tests/e2e/`.
 - `scripts/`: reusable verification, layout, inventory, and seed utilities.
 - `docs/`: architecture, product reference, brand guidance, and operating procedures.
-- `.github/`, `.claude/`, `.cursor/`: CI, contributor templates, and tool configuration.
+- `.github/`: CI workflows and templates.
 
-Runtime values belong to their source files. [AGENTS.md](AGENTS.md) owns contributor instructions;
-[CLAUDE.md](CLAUDE.md) points there. The [architecture guide](docs/ARCHITECTURE.md) explains data
-flow and the [product reference](docs/BMJ-SSOT.md) preserves mission and product context. Completed
-plans, audits, delivery summaries, templates, and session transcripts are available in Git history.
+The [architecture guide](docs/ARCHITECTURE.md) explains data flow, the
+[product reference](docs/BMJ-SSOT.md) covers mission and product context, and
+[CONTRIBUTING](docs/CONTRIBUTING.md) covers how to contribute.
 
 ## Checks
 
@@ -77,13 +75,9 @@ service-role credential, which must remain server-only.
 - [Release order](docs/ops/release-sequence.md), [backup/restore](docs/ops/backup-restore.md), and
   [secret rotation](docs/ops/secret-rotation.md).
 - [Chairman consistency](docs/ops/chairman-consistency-reference.md).
-- [Brand invariants](docs/brand/invariants.md), [visual identity](docs/brand/visual-ssot.md),
+- [Brand rules](docs/brand/invariants.md), [visual identity](docs/brand/visual-ssot.md),
   [art direction](docs/brand/art-direction-spec.md), and
   [publication design](docs/brand/movement-literature-spec.md).
-
-Unique historical brand references, Patreon strategy, nonprofit setup, and security material remain
-as source inputs. Their dates do not establish present account state or authorize any action. Live
-schemas, brand tokens, and current operating guides govern implementation.
 
 ## License
 

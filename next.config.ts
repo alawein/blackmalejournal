@@ -60,10 +60,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-// withSentryConfig is a no-op at build time unless SENTRY_AUTH_TOKEN is set.
-// Sourcemap upload and release tagging are gated on SENTRY_ORG/SENTRY_PROJECT
-// being present; without them the wrapper just passes the config through.
 export default withSentryConfig(nextConfig, {
+  telemetry: false,
   org: process.env.SENTRY_ORG,
   project: process.env.SENTRY_PROJECT,
   authToken: process.env.SENTRY_AUTH_TOKEN,

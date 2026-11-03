@@ -1,6 +1,8 @@
 # The Black Male Journal
 
-Source code for an independent editorial platform, for developers who run or extend it. It is built
+Source code for an independent editorial platform, for developers who run or extend it.
+
+It is built
 with Next.js 16, TypeScript, Supabase, and Stripe, and includes a member portal and an administrator
 CMS. The repository ships an article template and no published articles.
 

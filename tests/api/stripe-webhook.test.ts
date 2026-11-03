@@ -15,12 +15,8 @@ jest.mock('@/lib/stripe/config', () => ({
   }),
 }));
 
-const mockEq = jest.fn().mockResolvedValue({});
-const mockAdminUpdate = jest.fn().mockReturnValue({ eq: mockEq });
-const mockAdminFrom = jest.fn().mockReturnValue({ update: mockAdminUpdate });
-const mockAdminClient = {
-  from: mockAdminFrom,
-};
+const mockRpc = jest.fn();
+const mockAdminClient = { rpc: mockRpc };
 jest.mock('@/lib/supabase/admin', () => ({
   createAdminClient: () => mockAdminClient,
 }));
@@ -41,7 +37,7 @@ function makeWebhookRequest(body: string, signature?: string) {
 
 function makeEvent(type: string, data: Record<string, unknown> = {}) {
   return {
-    type,
+    id: 'evt_synthetic', created: 100, type,
     data: {
       object: data,
     },
@@ -51,9 +47,7 @@ function makeEvent(type: string, data: Record<string, unknown> = {}) {
 describe('POST /api/stripe/webhook', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    mockEq.mockResolvedValue({});
-    mockAdminUpdate.mockReturnValue({ eq: mockEq });
-    mockAdminFrom.mockReturnValue({ update: mockAdminUpdate });
+    mockRpc.mockResolvedValue({ data: 'applied', error: null });
   });
 
   it('returns 400 when no signature header', async () => {
@@ -80,15 +74,14 @@ describe('POST /api/stripe/webhook', () => {
       );
       const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
       expect(res.status).toBe(200);
-      expect(mockAdminFrom).toHaveBeenCalledWith('members');
-      expect(mockAdminUpdate).toHaveBeenCalledWith(
+      expect(mockRpc).toHaveBeenCalledWith('apply_stripe_membership_event',
         expect.objectContaining({
-          tier: 'basic',
-          stripe_customer_id: 'cus_123',
-          stripe_subscription_id: 'sub_456',
+          p_tier: 'basic',
+          p_customer_id: 'cus_123',
+          p_subscription_id: 'sub_456',
         }),
       );
-      expect(mockEq).toHaveBeenCalledWith('id', 'u1');
+      expect(mockRpc).toHaveBeenCalledWith('apply_stripe_membership_event', expect.objectContaining({ p_member_id: 'u1' }));
     });
 
     it('handles string customer ID', async () => {
@@ -101,9 +94,9 @@ describe('POST /api/stripe/webhook', () => {
       );
       const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
       expect(res.status).toBe(200);
-      expect(mockAdminUpdate).toHaveBeenCalledWith(
+      expect(mockRpc).toHaveBeenCalledWith('apply_stripe_membership_event',
         expect.objectContaining({
-          stripe_customer_id: 'cus_string',
+          p_customer_id: 'cus_string',
         }),
       );
     });
@@ -118,9 +111,9 @@ describe('POST /api/stripe/webhook', () => {
       );
       const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
       expect(res.status).toBe(200);
-      expect(mockAdminUpdate).toHaveBeenCalledWith(
+      expect(mockRpc).toHaveBeenCalledWith('apply_stripe_membership_event',
         expect.objectContaining({
-          stripe_customer_id: 'cus_obj',
+          p_customer_id: 'cus_obj',
         }),
       );
     });
@@ -135,7 +128,7 @@ describe('POST /api/stripe/webhook', () => {
       );
       const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
       expect(res.status).toBe(200);
-      expect(mockAdminUpdate).not.toHaveBeenCalled();
+      expect(mockRpc).not.toHaveBeenCalled();
     });
 
     it('returns 200 and skips DB update for donation type', async () => {
@@ -152,7 +145,7 @@ describe('POST /api/stripe/webhook', () => {
       expect(res.status).toBe(200);
       const body = await res.json();
       expect(body.received).toBe(true);
-      expect(mockAdminUpdate).not.toHaveBeenCalled();
+      expect(mockRpc).not.toHaveBeenCalled();
     });
   });
 
@@ -170,8 +163,8 @@ describe('POST /api/stripe/webhook', () => {
       );
       const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
       expect(res.status).toBe(200);
-      expect(mockAdminUpdate).toHaveBeenCalledWith(
-        expect.objectContaining({ tier: 'premium' }),
+      expect(mockRpc).toHaveBeenCalledWith('apply_stripe_membership_event',
+        expect.objectContaining({ p_tier: 'premium', p_event_type: 'customer.subscription.updated' }),
       );
     });
 
@@ -188,12 +181,7 @@ describe('POST /api/stripe/webhook', () => {
       );
       const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
       expect(res.status).toBe(200);
-      // Should not update tier for non-active subscription
-      if (mockAdminUpdate.mock.calls.length > 0) {
-        expect(mockAdminUpdate).not.toHaveBeenCalledWith(
-          expect.objectContaining({ tier: 'basic' }),
-        );
-      }
+      expect(mockRpc).not.toHaveBeenCalled();
     });
 
     it('skips when unknown price ID', async () => {
@@ -209,7 +197,7 @@ describe('POST /api/stripe/webhook', () => {
       );
       const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
       expect(res.status).toBe(200);
-      expect(mockAdminUpdate).not.toHaveBeenCalled();
+      expect(mockRpc).not.toHaveBeenCalled();
     });
   });
 
@@ -223,12 +211,12 @@ describe('POST /api/stripe/webhook', () => {
       );
       const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
       expect(res.status).toBe(200);
-      expect(mockAdminUpdate).toHaveBeenCalledWith(
-        expect.objectContaining({ tier: 'free' }),
+      expect(mockRpc).toHaveBeenCalledWith('apply_stripe_membership_event',
+        expect.objectContaining({ p_event_type: 'customer.subscription.deleted', p_tier: 'free' }),
       );
     });
 
-    it('clears subscription_id', async () => {
+    it('passes the deleted subscription ID for the database to clear', async () => {
       mockConstructEvent.mockReturnValue(
         makeEvent('customer.subscription.deleted', {
           id: 'sub_123',
@@ -237,8 +225,8 @@ describe('POST /api/stripe/webhook', () => {
       );
       const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
       expect(res.status).toBe(200);
-      expect(mockAdminUpdate).toHaveBeenCalledWith(
-        expect.objectContaining({ stripe_subscription_id: null }),
+      expect(mockRpc).toHaveBeenCalledWith('apply_stripe_membership_event',
+        expect.objectContaining({ p_subscription_id: 'sub_123', p_event_type: 'customer.subscription.deleted' }),
       );
     });
   });
@@ -272,7 +260,7 @@ describe('POST /api/stripe/webhook', () => {
   });
 
   it('returns 500 when DB update throws', async () => {
-    mockEq.mockRejectedValue(new Error('DB error'));
+    mockRpc.mockRejectedValue(new Error('DB error'));
     mockConstructEvent.mockReturnValue(
       makeEvent('checkout.session.completed', {
         customer: 'cus_123',
@@ -285,7 +273,7 @@ describe('POST /api/stripe/webhook', () => {
   });
 
   it('returns 500 when DB update resolves with an error payload', async () => {
-    mockEq.mockResolvedValue({ error: { message: 'Row-level policy violation' } });
+    mockRpc.mockResolvedValue({ error: { message: 'Row-level policy violation' } });
     mockConstructEvent.mockReturnValue(
       makeEvent('customer.subscription.deleted', {
         id: 'sub_123',

@@ -23,6 +23,33 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      stripe_events: {
+        Row: {
+          id: string;
+          type: string;
+          stripe_created: string;
+          subscription_id: string | null;
+          applied_member_id: string | null;
+          processed_at: string;
+        };
+        Insert: {
+          id: string;
+          type: string;
+          stripe_created: string;
+          subscription_id?: string | null;
+          applied_member_id?: string | null;
+          processed_at?: string;
+        };
+        Update: {
+          id?: string;
+          type?: string;
+          stripe_created?: string;
+          subscription_id?: string | null;
+          applied_member_id?: string | null;
+          processed_at?: string;
+        };
+        Relationships: [];
+      };
       // ── articles ────────────────────────────────────────────────────────────
       articles: {
         Row: {
@@ -609,6 +636,18 @@ export type Database = {
     Views: Record<string, never>;
 
     Functions: {
+      apply_stripe_membership_event: {
+        Args: {
+          p_event_id: string;
+          p_event_type: string;
+          p_stripe_created: string;
+          p_subscription_id: string | null;
+          p_customer_id: string | null;
+          p_member_id: string | null;
+          p_tier: string;
+        };
+        Returns: string;
+      };
       search_content: {
         Args: {
           query: string;

@@ -68,8 +68,7 @@ All image assets for BMJ follow a strict organizational system to ensure consist
 | **Textures** | | | | |
 | `/textures/grain.svg` | SVG | Tile | Visual Effect | Film grain overlay |
 | **Documentation** | | | | |
-| `/docs/brand/bmj-palettes.png` | PNG | Reference | Internal | Color palette reference |
-| `/docs/brand/bmj-palettes-reference.png` | PNG | Reference | Internal | Extended palette reference |
+| `/docs/brand/bmj-palettes-reference.png` | PNG | Reference | Internal | Color palette reference |
 
 ---
 
